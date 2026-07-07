@@ -235,16 +235,63 @@ class SushiGame {
     this.nextWord();
   }
 
+  applyFlexibleRomaji(inputChar) {
+    const equivs = [
+      ['tsu', 'tu'], ['shi', 'si'], ['chi', 'ti'], ['fu', 'hu'], ['ji', 'zi'],
+      ['sha', 'sya'], ['shu', 'syu'], ['sho', 'syo'],
+      ['cha', 'tya'], ['cha', 'cya'], ['chu', 'tyu'], ['chu', 'cyu'], ['cho', 'tyo'], ['cho', 'cyo'],
+      ['ja', 'zya'], ['ja', 'jya'], ['ju', 'zyu'], ['ju', 'jyu'], ['jo', 'zyo'], ['jo', 'jyo'],
+      ['nn', 'n']
+    ];
+
+    for (let i = 0; i < equivs.length; i++) {
+      for (let dir = 0; dir < 2; dir++) {
+        const from = equivs[i][dir];
+        const to = equivs[i][1 - dir];
+        
+        // Find if the original romaji contains 'from' starting at some point that overlaps with what we've typed
+        // Since we only diverge at the current keystroke, the divergence must happen such that:
+        // typedSoFar + inputChar matches a prefix of 'to'
+        // AND the original string starts with 'from' at the exact same start position!
+        
+        // Let's check overlap lengths from 0 to max possible
+        for (let overlap = 0; overlap <= this.currentCharIndex; overlap++) {
+          const startIdx = this.currentCharIndex - overlap;
+          const origSub = this.currentWord.romaji.substring(startIdx);
+          
+          if (origSub.startsWith(from)) {
+            const typedSub = this.typedString.substring(startIdx) + inputChar;
+            const toAndRest = to + origSub.substring(from.length);
+            if (toAndRest.startsWith(typedSub)) {
+              // Match found! Replace 'from' with 'to' in currentWord.romaji
+              this.currentWord.romaji = this.currentWord.romaji.substring(0, startIdx) + to + this.currentWord.romaji.substring(startIdx + from.length);
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   handleKeyPress(key) {
     if (!this.isRunning || !this.currentWord) return;
 
     // Ignore non-character keys
     if (key.length > 1) return;
     
-    const targetChar = this.currentWord.romaji[this.currentCharIndex].toLowerCase();
+    let targetChar = this.currentWord.romaji[this.currentCharIndex].toLowerCase();
     const inputChar = key.toLowerCase();
 
     this.totalKeystrokes++;
+
+    if (inputChar !== targetChar) {
+      if (this.applyFlexibleRomaji(inputChar)) {
+        // Flexible romaji matched and modified this.currentWord.romaji
+        // Re-evaluate targetChar
+        targetChar = this.currentWord.romaji[this.currentCharIndex].toLowerCase();
+      }
+    }
 
     if (inputChar === targetChar) {
       // Correct!
