@@ -238,9 +238,9 @@ class SushiGame {
   applyFlexibleRomaji(inputChar) {
     const equivs = [
       ['tsu', 'tu'], ['shi', 'si'], ['chi', 'ti'], ['fu', 'hu'], ['ji', 'zi'],
-      ['sha', 'sya'], ['shu', 'syu'], ['sho', 'syo'],
-      ['cha', 'tya'], ['cha', 'cya'], ['chu', 'tyu'], ['chu', 'cyu'], ['cho', 'tyo'], ['cho', 'cyo'],
-      ['ja', 'zya'], ['ja', 'jya'], ['ju', 'zyu'], ['ju', 'jyu'], ['jo', 'zyo'], ['jo', 'jyo'],
+      ['sha', 'sya'], ['shu', 'syu'], ['sho', 'syo'], ['she', 'sye'],
+      ['cha', 'tya'], ['cha', 'cya'], ['chu', 'tyu'], ['chu', 'cyu'], ['cho', 'tyo'], ['cho', 'cyo'], ['che', 'tye'], ['che', 'cye'],
+      ['ja', 'zya'], ['ja', 'jya'], ['ju', 'zyu'], ['ju', 'jyu'], ['jo', 'zyo'], ['jo', 'jyo'], ['je', 'zye'], ['je', 'jye'],
       ['nn', 'n']
     ];
 
