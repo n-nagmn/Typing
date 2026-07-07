@@ -163,6 +163,7 @@ class SushiGame {
     this.currentWord = this.wordQueue.shift();
     this.currentCharIndex = 0;
     this.typedString = "";
+    this.wordsSpawned++;
     
     // Calculate duration based on difficulty and text length
     let baseTime = 2500;
@@ -202,6 +203,7 @@ class SushiGame {
     this.currentWord = wagyu;
     this.currentCharIndex = 0;
     this.typedString = "";
+    this.wordsSpawned++;
     if (this.plateTimeout) clearTimeout(this.plateTimeout);
     
     if (this.onNewWord) this.onNewWord(this.currentWord, 6000);
@@ -351,6 +353,7 @@ class SushiGame {
       cost: this.courseCost,
       profit: this.score - this.courseCost,
       wordsCompleted: this.wordsCompleted,
+      wordsSpawned: this.wordsSpawned,
       accuracy: this.totalKeystrokes > 0 ? Math.round((this.correctKeystrokes / this.totalKeystrokes) * 100) : 0,
       maxCombo: this.maxCombo,
       wpm: this.calculateWPM(),

@@ -344,7 +344,7 @@ class App {
       }
       
       if (this.isOnline) {
-        onlineBattle.sendProgress(this.game.score, this.game.combo, this.game.wordsCompleted, this.game.getResults().accuracy);
+        onlineBattle.sendProgress(this.game.score, this.game.combo, this.game.wordsSpawned || 0, this.game.getResults().accuracy);
       }
     };
 
@@ -395,7 +395,7 @@ class App {
       this.showInputFeedback(true);
       
       if (this.isOnline) {
-        onlineBattle.sendProgress(this.game.score, this.game.combo, this.game.wordsCompleted, this.game.getResults().accuracy);
+        onlineBattle.sendProgress(this.game.score, this.game.combo, this.game.wordsSpawned || 0, this.game.getResults().accuracy);
       }
     };
 
@@ -640,8 +640,10 @@ class App {
     };
 
     onlineBattle.onBattleResults = (data) => {
-      this.showScreen('battle-results');
+      this.game.stop();
+      this.showScreen('battleResults');
       soundManager.playResult();
+      
       const list = this.els.battleResultsList;
       list.innerHTML = '';
       
@@ -734,7 +736,7 @@ class App {
     onlineBattle.players.forEach(p => {
       if (p.name === onlineBattle.playerName) return; // Skip myself
       
-      this.oppWords[p.name] = 0;
+      this.oppWords[p.name] = 1;
       const div = document.createElement('div');
       div.className = 'glass-panel';
       div.style.padding = '0.5rem';
@@ -760,7 +762,7 @@ class App {
     // Scale down plate for opponent view
     plate.style.width = '60px';
     plate.style.height = '60px';
-    plate.style.animation = `plate-move 4000ms linear forwards`; // Fixed speed for opponent visual
+    plate.style.animation = `plate-move 6000ms linear forwards`; // Match normal mode roughly
     plate.innerHTML = `<span style="font-size:1.5rem;">🥩</span>`;
     track.appendChild(plate);
   }
