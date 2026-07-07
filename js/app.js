@@ -211,7 +211,8 @@ class App {
 
     // Online Lobby
     this.els.btnCreateRoom.addEventListener('click', () => {
-      const name = this.els.roomPlayerName.value.trim() || 'Player';
+      let name = this.els.roomPlayerName.value.trim() || 'Player';
+      name = name.substring(0, 8);
       const diff = this.els.roomDifficulty.value;
       const max = this.els.roomMaxPlayers.value;
       localStorage.setItem('sushiPlayerName', name);
@@ -579,7 +580,8 @@ class App {
       
       document.querySelectorAll('.room-join-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          const name = this.els.joinPlayerName.value.trim() || 'Player';
+          let name = this.els.joinPlayerName.value.trim() || 'Player';
+          name = name.substring(0, 8);
           localStorage.setItem('sushiPlayerName', name);
           onlineBattle.joinRoom(e.target.getAttribute('data-id'), name);
         });
@@ -614,13 +616,14 @@ class App {
     };
 
     onlineBattle.onOpponentProgress = (data) => {
-      const scoreEl = document.getElementById(`bp-score-${data.playerName}`);
-      const comboEl = document.getElementById(`bp-combo-${data.playerName}`);
+      const safeId = escapeHtml(data.playerName).replace(/\s+/g, '_');
+      const scoreEl = document.getElementById(`bp-score-${safeId}`);
+      const comboEl = document.getElementById(`bp-combo-${safeId}`);
       if(scoreEl) scoreEl.textContent = data.score;
       if(comboEl) comboEl.textContent = data.combo;
       
       // Update opponent plate visual
-      const track = document.getElementById(`bp-track-${data.playerName}`);
+      const track = document.getElementById(`bp-track-${safeId}`);
       if (track) {
         if (!this.oppWords[data.playerName]) this.oppWords[data.playerName] = 0;
         if (data.wordsCompleted > this.oppWords[data.playerName]) {
@@ -736,6 +739,9 @@ class App {
     onlineBattle.players.forEach(p => {
       if (p.name === onlineBattle.playerName) return; // Skip myself
       
+      // Sanitize p.name for ID to prevent issues with spaces
+      const safeId = escapeHtml(p.name).replace(/\s+/g, '_');
+      
       this.oppWords[p.name] = 1;
       const div = document.createElement('div');
       div.className = 'glass-panel';
@@ -744,9 +750,9 @@ class App {
       div.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
           <div style="font-weight: bold;">${escapeHtml(p.name)}</div>
-          <div style="font-size: 0.9rem;">スコア: <span id="bp-score-${p.name}" style="color:var(--secondary);">0</span>円 | <span id="bp-combo-${p.name}">0</span>コンボ</div>
+          <div style="font-size: 0.9rem;">スコア: <span id="bp-score-${safeId}" style="color:var(--secondary);">0</span>円 | <span id="bp-combo-${safeId}">0</span>コンボ</div>
         </div>
-        <div style="width: 100%; height: 60px; background: #111; position: relative; overflow: hidden; border-radius: 4px;" id="bp-track-${p.name}"></div>
+        <div style="width: 100%; height: 60px; background: #111; position: relative; overflow: hidden; border-radius: 4px;" id="bp-track-${safeId}"></div>
       `;
       opponentsArea.appendChild(div);
       this.spawnOpponentPlate(p.name);
