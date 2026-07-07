@@ -4,11 +4,7 @@ class App {
     this.currentScreen = 'title';
     this.isOnline = false;
     this.currentMode = 'normal';
-    this.initParticles();
-  }
-
-  initParticles() {
-    this.particles = new ParticleSystem();
+    // Removed initParticles since ParticleSystem is not defined
   }
 
   init() {
