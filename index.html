@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>焼肉打タイピング - Yakiniku Type Master</title>
+  <meta name="description" content="焼肉をモチーフにしたタイピングゲーム。シングルプレイ、オンライン対戦、ランキング機能搭載。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <div id="app">
+    <!-- Background Particles -->
+    <div id="particles-bg"></div>
+    
+    <!-- Title Screen -->
+    <div id="screen-title" class="screen active">
+      <div class="title-wrapper">
+        <div class="sushi-emoji">🥩</div>
+        <h1 class="game-title">焼肉打<span class="title-sub">タイピング</span></h1>
+        <p class="title-tagline">タイピングでお肉を焼きまくれ！</p>
+      </div>
+      <nav class="main-menu">
+        <button id="btn-single" class="menu-btn"><span class="btn-icon">🎮</span>シングルプレイ</button>
+        <button id="btn-online" class="menu-btn online"><span class="btn-icon">⚔️</span>オンライン対戦</button>
+        <button id="btn-ranking" class="menu-btn"><span class="btn-icon">🏆</span>ランキング</button>
+        <button id="btn-howto" class="menu-btn"><span class="btn-icon">📖</span>遊び方</button>
+      </nav>
+    </div>
+
+    <!-- Difficulty Selection -->
+    <div id="screen-difficulty" class="screen">
+      <button class="back-btn" data-target="title">← 戻る</button>
+      <h2>コースとモード選択</h2>
+      
+      <div class="mode-selection">
+        <h3>モード</h3>
+        <div class="mode-buttons">
+          <button class="mode-btn active" data-mode="normal">普通</button>
+          <button class="mode-btn" data-mode="practice">練習</button>
+          <button class="mode-btn" data-mode="accuracy">正確重視</button>
+          <button class="mode-btn" data-mode="speed">速度必須</button>
+          <button class="mode-btn" data-mode="sudden_death">一発勝負</button>
+        </div>
+      </div>
+
+      <div class="difficulty-cards">
+      <h2 class="screen-title">コースを選択</h2>
+      <div class="course-container">
+        <div class="course-card" data-difficulty="easy">
+          <div class="course-icon">🍙</div>
+          <h3>お手軽コース</h3>
+          <div class="course-price">3,000円</div>
+          <ul class="course-details">
+            <li>⏱️ 制限時間: 60秒</li>
+            <li>📝 短い単語中心</li>
+            <li>🌟 初心者向け</li>
+          </ul>
+          <button class="course-start-btn">挑戦する</button>
+        </div>
+        <div class="course-card featured" data-difficulty="normal">
+          <div class="course-badge">おすすめ</div>
+          <div class="course-icon">🍱</div>
+          <h3>おすすめコース</h3>
+          <div class="course-price">5,000円</div>
+          <ul class="course-details">
+            <li>⏱️ 制限時間: 90秒</li>
+            <li>📝 中程度の単語</li>
+            <li>🌟 中級者向け</li>
+          </ul>
+          <button class="course-start-btn">挑戦する</button>
+        </div>
+        <div class="course-card" data-difficulty="hard">
+          <div class="course-icon">🏯</div>
+          <h3>高級コース</h3>
+          <div class="course-price">10,000円</div>
+          <ul class="course-details">
+            <li>⏱️ 制限時間: 120秒</li>
+            <li>📝 長い単語・文章</li>
+            <li>🌟 上級者向け</li>
+          </ul>
+          <button class="course-start-btn">挑戦する</button>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown Screen -->
+    <div id="screen-countdown" class="screen">
+      <div id="countdown-number">3</div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="screen-game" class="screen">
+      <div id="game-header">
+        <div class="time-box">残り <span id="timer">0</span> 秒</div>
+        <div class="renda-meter-container">
+          <div class="renda-label">連打メーター</div>
+          <div class="renda-track">
+            <div id="renda-fill" class="renda-fill"></div>
+            <div class="renda-marker m-1" style="left: 25%;"><span id="renda-m1">1秒追加</span></div>
+            <div class="renda-marker m-2" style="left: 50%;"><span id="renda-m2">1秒追加</span></div>
+            <div class="renda-marker m-3" style="left: 75%;"><span id="renda-m3">2秒追加</span></div>
+            <div class="renda-marker m-4" style="left: 100%;"><span id="renda-m4">3秒追加</span></div>
+          </div>
+        </div>
+        <div class="header-item" id="score-container">
+          <span class="header-label">スコア</span>
+          <span id="score" class="header-value">0<span class="yen">円</span></span>
+        </div>
+        <div class="header-item" id="combo-container">
+          <span class="header-label">コンボ</span>
+          <span id="combo" class="header-value">0</span>
+        </div>
+      </div>
+      
+      <div id="conveyor-area">
+        <div id="conveyor-belt">
+          <div id="sushi-track"></div>
+        </div>
+      </div>
+
+      <div id="typing-area">
+        <div id="word-display">
+          <div id="current-word-jp"></div>
+          <div id="current-word-reading"></div>
+        </div>
+        <div id="romaji-display">
+          <span id="typed-correct"></span>
+          <span id="typed-current"></span>
+          <span id="typed-remaining"></span>
+        </div>
+        <div id="input-feedback"></div>
+      </div>
+
+      <div id="game-footer">
+        <div class="stat-box">タイプ数 <span id="stat-keystrokes">0</span></div>
+        <div class="stat-box">正確率 <span id="stat-accuracy">100</span>%</div>
+        <div class="stat-box">ミス <span id="stat-miss">0</span></div>
+      </div>
+      <div class="plate-tally-container">
+        <div class="plate-tally">
+          <span>¥300 × <span id="tally-300">00</span></span>
+          <span>¥500 × <span id="tally-500">00</span></span>
+          <span>¥800 × <span id="tally-800">00</span></span>
+          <span>¥1000 × <span id="tally-1000">00</span></span>
+          <span>¥1500 × <span id="tally-1500">00</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="screen-results" class="screen">
+      <div class="results-container">
+        <h2 id="result-title">結果発表</h2>
+        <div id="result-sushi-animation">🔥</div>
+        <div id="result-summary">
+          <div class="result-main">
+            <span id="result-label"></span>
+            <span id="result-amount" class="result-big-number"></span>
+          </div>
+        </div>
+        <div id="result-details">
+          <div class="result-row"><span>コース</span><span id="res-course"></span></div>
+          <div class="result-row"><span>獲得スコア</span><span id="res-score"></span></div>
+          <div class="result-row"><span>食べたお肉</span><span id="res-plates"></span></div>
+          <div class="result-row"><span>正確率</span><span id="res-accuracy"></span></div>
+          <div class="result-row"><span>最大コンボ</span><span id="res-combo"></span></div>
+          <div class="result-row"><span>タイプ速度</span><span id="res-wpm"></span></div>
+          <div class="result-row"><span>ミスタイプ</span><span id="res-miss"></span></div>
+        </div>
+        <div id="rank-submit">
+          <input type="text" id="player-name" placeholder="名前（8文字まで）" maxlength="8">
+          <button id="btn-submit-score" class="submit-btn">ランキング登録</button>
+        </div>
+        <div class="result-actions">
+          <button id="btn-retry" class="action-btn">もう一度</button>
+          <button id="btn-back-title" class="action-btn">タイトルへ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ranking Screen -->
+    <div id="screen-ranking" class="screen">
+      <button class="back-btn" data-target="title">← 戻る</button>
+      <h2 class="screen-title">🏆 ランキング</h2>
+      <div class="ranking-controls">
+        <div class="rank-tabs">
+          <button class="rank-tab active" data-tab="overall">総合</button>
+          <button class="rank-tab" data-tab="weekly">週間</button>
+        </div>
+        <div class="difficulty-filter">
+          <button class="filter-btn active" data-difficulty="all">全て</button>
+          <button class="filter-btn" data-difficulty="easy">お手軽</button>
+          <button class="filter-btn" data-difficulty="normal">おすすめ</button>
+          <button class="filter-btn" data-difficulty="hard">高級</button>
+        </div>
+      </div>
+      <div id="ranking-table-container">
+        <table id="ranking-table">
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>名前</th>
+              <th>スコア</th>
+              <th>コース</th>
+              <th>正確率</th>
+              <th>最大コンボ</th>
+              <th>日時</th>
+            </tr>
+          </thead>
+          <tbody id="ranking-body"></tbody>
+        </table>
+        <div id="ranking-empty" class="hidden" style="text-align:center; padding: 2rem;">データがありません</div>
+        <div id="ranking-loading" class="hidden" style="text-align:center; padding: 2rem;">読み込み中...</div>
+      </div>
+    </div>
+
+    <!-- Online Lobby -->
+    <div id="screen-online" class="screen">
+      <button class="back-btn" data-target="title">← 戻る</button>
+      <h2 class="screen-title">⚔️ オンライン対戦</h2>
+      <div class="online-container">
+        <div class="online-panel">
+          <h3>部屋を作成</h3>
+          <div class="create-room-form">
+            <input type="text" id="room-player-name" placeholder="あなたの名前" maxlength="8">
+            <select id="room-difficulty">
+              <option value="easy">お手軽コース</option>
+              <option value="normal" selected>おすすめコース</option>
+              <option value="hard">高級コース</option>
+            </select>
+            <select id="room-max-players">
+              <option value="2">2人</option>
+              <option value="3">3人</option>
+              <option value="4">4人</option>
+            </select>
+            <button id="btn-create-room" class="online-btn">部屋を作成</button>
+          </div>
+        </div>
+        <div class="online-panel">
+          <h3>部屋一覧</h3>
+          <div id="room-join-name-area" style="margin-bottom:1rem;">
+            <input type="text" id="join-player-name" placeholder="あなたの名前" maxlength="8" style="width:100%;">
+          </div>
+          <div id="room-list"></div>
+          <button id="btn-refresh-rooms" class="online-btn secondary">🔄 更新</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Waiting Room -->
+    <div id="screen-waiting" class="screen">
+      <h2 class="screen-title">対戦準備</h2>
+      <div class="waiting-container">
+        <div id="room-info" style="font-size: 1.2rem; margin-bottom: 1rem;">
+          <span>部屋ID: <span id="waiting-room-id" style="color:var(--secondary);"></span></span> | 
+          <span>コース: <span id="waiting-difficulty" style="color:var(--secondary);"></span></span>
+        </div>
+        <div id="player-list"></div>
+        <div id="waiting-status" style="margin-bottom: 2rem;">他のプレイヤーを待っています...</div>
+        <div style="display:flex; gap:1rem;">
+          <button id="btn-start-battle" class="online-btn hidden">対戦開始</button>
+          <button id="btn-leave-room" class="online-btn secondary">退出</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Battle Screen -->
+    <div id="screen-battle" class="screen">
+      <div id="battle-header" style="margin-bottom: 1rem; background: var(--surface); padding: 0.5rem 1rem; border-radius: var(--border-radius); backdrop-filter: blur(10px); display: flex; justify-content: center;">
+        <div class="header-item">
+          <span class="header-label">残り時間</span>
+          <span id="battle-timer" class="header-value">90</span>
+        </div>
+      </div>
+      
+      <div id="battle-split-container" style="display: flex; flex-direction: column; gap: 1rem; height: 75vh;">
+        <!-- Opponents Area (Top Half) -->
+        <div id="battle-opponents-area" style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem; overflow-y: auto;">
+          <!-- Opponent lanes generated dynamically -->
+        </div>
+
+        <!-- Tug of war bar (only visible in 1v1 online) -->
+        <div id="tug-of-war-container" style="display: none; width: 100%; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+          <div style="display:flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem;">
+            <span id="tow-left-name">P1</span>
+            <span style="color:var(--secondary)">優勢メーター</span>
+            <span id="tow-right-name">P2</span>
+          </div>
+          <div style="width: 100%; height: 20px; background: #333; border-radius: 10px; position: relative; overflow: hidden; border: 2px solid #555;">
+            <div id="tow-bar" style="position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.3s ease;"></div>
+            <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: white; z-index: 10;"></div>
+          </div>
+        </div>
+
+        <!-- My Area (Bottom Half) -->
+        <div id="battle-my-area" style="flex: 1.5; display: flex; flex-direction: column; border-top: 2px solid var(--secondary); padding-top: 1rem;">
+          <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; color: var(--secondary);">自分 (My Lane)</div>
+          
+          <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <div class="header-item">スコア: <span id="bp-score-me" class="header-value">0</span>円</div>
+            <div class="header-item">コンボ: <span id="bp-combo-me" class="header-value">0</span></div>
+          </div>
+
+          <div id="battle-conveyor-area" style="width: 100%; height: 100px; background: #111; position: relative; overflow: hidden; margin-bottom: 1rem; border-radius: 8px;">
+            <div id="battle-sushi-track" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+          </div>
+
+          <div id="battle-typing-area" class="glass-panel" style="padding: 1rem; text-align: center; flex: 1;">
+            <div id="battle-word-display" style="margin-bottom: 0.5rem;">
+              <div id="battle-word-jp" style="font-size: 2.5rem; font-weight: 900;"></div>
+              <div id="battle-word-reading" style="font-size: 1.2rem; color: var(--secondary);"></div>
+            </div>
+            <div id="battle-romaji-display" style="font-size: 2rem; font-family: 'Orbitron'; background: rgba(0,0,0,0.5); padding: 0.5rem; border-radius: 8px;">
+              <span id="battle-typed-correct" style="color: var(--text-muted);"></span>
+              <span id="battle-typed-current" style="color: var(--primary); text-decoration: underline;"></span>
+              <span id="battle-typed-remaining" style="color: var(--text-main);"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Battle Results -->
+    <div id="screen-battle-results" class="screen">
+      <h2 class="screen-title">対戦結果</h2>
+      <div class="results-container" style="margin-bottom: 2rem;">
+        <div id="battle-results-list" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;"></div>
+        <div class="result-actions">
+          <button id="btn-battle-back" class="action-btn">ロビーへ戻る</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Play -->
+    <div id="screen-howto" class="screen">
+      <button class="back-btn" data-target="title">← 戻る</button>
+      <h2 class="screen-title">📖 遊び方</h2>
+      <div class="howto-container">
+        <div class="howto-section">
+          <h3>🎮 基本ルール</h3>
+          <p>流れてくるお肉に書かれた単語をローマ字で入力します。制限時間内にできるだけ多くのお肉を焼きましょう！</p>
+        </div>
+        <div class="howto-section">
+          <h3>🍣 コース選択</h3>
+          <p><strong>お手軽（3,000円）</strong>：60秒、短い単語。初心者向け。</p>
+          <p><strong>おすすめ（5,000円）</strong>：90秒、中程度の単語。</p>
+          <p><strong>高級（10,000円）</strong>：120秒、長い単語。上級者向け。</p>
+        </div>
+        <div class="howto-section">
+          <h3>💰 スコア計算</h3>
+          <p>獲得スコアがコース料金を上回れば「お得」、下回れば「損」になります。</p>
+        </div>
+        <div class="howto-section">
+          <h3>🔥 コンボシステム</h3>
+          <p>ミスなく連続でタイピングするとコンボボーナスが発生します。</p>
+          <ul>
+            <li>5コンボ: ×1.2倍</li>
+            <li>10コンボ: ×1.5倍</li>
+            <li>20コンボ: ×2.0倍</li>
+            <li>30コンボ以上: ×2.5倍</li>
+          </ul>
+        </div>
+        <div class="howto-section">
+          <h3>⚔️ オンライン対戦</h3>
+          <p>部屋を作成して他のプレイヤーとスコアを競い合います。全員に同じ単語が出題されます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="score-popups"></div>
+    <button id="sound-toggle" class="sound-btn">🔊</button>
+  </div>
+
+  <script src="js/words.js?v=3"></script>
+  <script src="js/audio.js?v=3"></script>
+  <script src="js/game.js?v=8"></script>
+  <script src="js/ranking.js?v=3"></script>
+  <script src="js/online.js?v=3"></script>
+  <script src="js/app.js?v=7"></script>
+</body>
+</html>

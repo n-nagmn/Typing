@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "id": "7340e4f6-ff82-4f13-bd07-b810d980917f",
+      "name": "test",
+      "score": 100,
+      "difficulty": "normal",
+      "accuracy": 0,
+      "maxCombo": 0,
+      "wpm": 0,
+      "missCount": 0,
+      "wordsCompleted": 0,
+      "timestamp": "2026-07-07T07:23:59.994Z"
+    }
+  ]
+}

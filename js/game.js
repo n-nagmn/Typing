@@ -1,0 +1,361 @@
+class SushiGame {
+  constructor() {
+    this.difficulty = null;
+    this.timeLimit = 0;
+    this.timer = 0;
+    this.score = 0;
+    this.combo = 0;
+    this.maxCombo = 0;
+    this.totalKeystrokes = 0;
+    this.correctKeystrokes = 0;
+    this.missCount = 0;
+    this.wordsCompleted = 0;
+    this.currentWord = null;
+    this.currentCharIndex = 0;
+    this.wordQueue = [];
+    this.isRunning = false;
+    this.intervalId = null;
+    this.courseCost = 0;
+    
+    // Renda Meter & Tally
+    this.rendaCount = 0;
+    this.platesTally = { 300: 0, 500: 0, 800: 0, 1000: 0, 1500: 0 };
+
+    // Romaji state machine
+    this.validPaths = [];
+    this.typedString = "";
+    this.plateTimeout = null;
+
+    // Callbacks
+    this.onGameEnd = null;
+    this.onScoreUpdate = null;
+    this.onComboUpdate = null;
+    this.onTimerUpdate = null;
+    this.onWordComplete = null;
+    this.onNewWord = null;
+    this.onMiss = null;
+    this.onCorrectKey = null;
+    this.onRendaUpdate = null;
+    this.onTallyUpdate = null;
+    this.onTimeAdded = null;
+    this.onPlateFlowsAway = null;
+    this.onWagyuComplete = null;
+  }
+
+  static DIFFICULTY_CONFIG = {
+    easy: { time: 60, cost: 3000, label: 'お手軽コース' },
+    normal: { time: 90, cost: 5000, label: 'おすすめコース' },
+    hard: { time: 120, cost: 10000, label: '高級コース' }
+  };
+
+  // Complex romaji mapping for flexible input
+  static ROMAJI_MAP = {
+    'あ':['a'], 'い':['i'], 'う':['u', 'wu'], 'え':['e'], 'お':['o'],
+    'か':['ka','ca'], 'き':['ki'], 'く':['ku','cu','qu'], 'け':['ke'], 'こ':['ko','co'],
+    'さ':['sa'], 'し':['shi','si','ci'], 'す':['su'], 'せ':['se','ce'], 'そ':['so'],
+    'た':['ta'], 'ち':['chi','ti'], 'つ':['tsu','tu'], 'て':['te'], 'と':['to'],
+    'な':['na'], 'に':['ni'], 'ぬ':['nu'], 'ね':['ne'], 'の':['no'],
+    'は':['ha'], 'ひ':['hi'], 'ふ':['fu','hu'], 'へ':['he'], 'ほ':['ho'],
+    'ま':['ma'], 'み':['mi'], 'む':['mu'], 'め':['me'], 'も':['mo'],
+    'や':['ya'], 'ゆ':['yu'], 'よ':['yo'],
+    'ら':['ra'], 'り':['ri'], 'る':['ru'], 'れ':['re'], 'ろ':['ro'],
+    'わ':['wa'], 'を':['wo'], 'ん':['nn','n'],
+    'が':['ga'], 'ぎ':['gi'], 'ぐ':['gu'], 'げ':['ge'], 'ご':['go'],
+    'ざ':['za'], 'じ':['ji','zi'], 'ず':['zu'], 'ぜ':['ze'], 'ぞ':['zo'],
+    'だ':['da'], 'ぢ':['di'], 'づ':['du'], 'で':['de'], 'ど':['do'],
+    'ば':['ba'], 'び':['bi'], 'ぶ':['bu'], 'べ':['be'], 'ぼ':['bo'],
+    'ぱ':['pa'], 'ぴ':['pi'], 'ぷ':['pu'], 'ぺ':['pe'], 'ぽ':['po'],
+    'きゃ':['kya'], 'きゅ':['kyu'], 'きょ':['kyo'],
+    'しゃ':['sha','sya'], 'しゅ':['shu','syu'], 'しょ':['sho','syo'],
+    'ちゃ':['cha','tya','cya'], 'ちゅ':['chu','tyu','cyu'], 'ちょ':['cho','tyo','cyo'],
+    'にゃ':['nya'], 'にゅ':['nyu'], 'にょ':['nyo'],
+    'ひゃ':['hya'], 'ひゅ':['hyu'], 'ひょ':['hyo'],
+    'みゃ':['mya'], 'みゅ':['myu'], 'みょ':['myo'],
+    'りゃ':['rya'], 'りゅ':['ryu'], 'りょ':['ryo'],
+    'ぎゃ':['gya'], 'ぎゅ':['gyu'], 'ぎょ':['gyo'],
+    'じゃ':['ja','zya','jya'], 'じゅ':['ju','zyu','jyu'], 'じょ':['jo','zyo','jyo'],
+    'びゃ':['bya'], 'びゅ':['byu'], 'びょ':['byo'],
+    'ぴゃ':['pya'], 'ぴゅ':['pyu'], 'ぴょ':['pyo'],
+    'ぁ':['la','xa'], 'ぃ':['li','xi'], 'ぅ':['lu','xu'], 'ぇ':['le','xe'], 'ぉ':['lo','xo'],
+    'ゃ':['lya','xya'], 'ゅ':['lyu','xyu'], 'ょ':['lyo','xyo'], 'っ':['ltu','xtu','ltsu']
+  };
+
+  getComboMultiplier() {
+    if (this.combo >= 30) return 2.5;
+    if (this.combo >= 20) return 2.0;
+    if (this.combo >= 10) return 1.5;
+    if (this.combo >= 5) return 1.2;
+    return 1.0;
+  }
+
+  init(difficulty, mode = 'normal', wordList = null) {
+    this.difficulty = difficulty;
+    this.mode = mode;
+    const config = SushiGame.DIFFICULTY_CONFIG[difficulty];
+    this.timeLimit = config.time;
+    this.timer = this.timeLimit;
+    this.courseCost = config.cost;
+    this.score = 0;
+    this.combo = 0;
+    this.maxCombo = 0;
+    this.totalKeystrokes = 0;
+    this.correctKeystrokes = 0;
+    this.missCount = 0;
+    this.wordsCompleted = 0;
+    this.rendaCount = 0;
+    this.platesTally = { 300: 0, 500: 0, 800: 0, 1000: 0, 1500: 0 };
+
+    // Use provided wordList (for online) or default database
+    if (wordList) {
+      this.wordQueue = [...wordList];
+    } else {
+      if (!window.WORD_DATABASE) {
+        console.error("WORD_DATABASE not loaded");
+        this.wordQueue = [{japanese:"エラー", reading:"えらー", romaji:"era-", points:100}];
+      } else {
+        this.wordQueue = [...window.WORD_DATABASE[difficulty]];
+        this.shuffleWords();
+      }
+    }
+  }
+
+  shuffleWords() {
+    for (let i = this.wordQueue.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.wordQueue[i], this.wordQueue[j]] = [this.wordQueue[j], this.wordQueue[i]];
+    }
+  }
+
+  start() {
+    this.isRunning = true;
+    this.nextWord();
+    
+    if (this.onTimerUpdate) this.onTimerUpdate(this.timer);
+    
+    this.intervalId = setInterval(() => {
+      this.timer--;
+      if (this.onTimerUpdate) this.onTimerUpdate(this.timer);
+      
+      if (this.timer <= 0) {
+        this.endGame();
+      }
+    }, 1000);
+  }
+
+  // Generate all valid romaji paths for a reading
+  _generatePaths(reading) {
+    // Simple naive parser for small scale - real typing games have more complex parsers
+    // For this implementation, we just use the pre-defined romaji in the word object
+    // to keep it simple, but we can allow some flexibility.
+    // Given the constraints, we will parse the default romaji from the DB.
+    // A robust parser would parse `reading` into chunks.
+    return [this.currentWord.romaji];
+  }
+
+  nextWord() {
+    if (this.wordQueue.length === 0) {
+      if (this.difficulty) {
+        this.wordQueue = [...window.WORD_DATABASE[this.difficulty]];
+        this.shuffleWords();
+      }
+    }
+    
+    this.currentWord = this.wordQueue.shift();
+    this.currentCharIndex = 0;
+    this.typedString = "";
+    
+    // Calculate duration based on difficulty and text length
+    let baseTime = 2500;
+    let charTime = 300;
+    
+    if (this.difficulty === 'easy') {
+      baseTime = 3500;
+      charTime = 350;
+    } else if (this.difficulty === 'normal') {
+      baseTime = 2500;
+      charTime = 280;
+    } else if (this.difficulty === 'hard') {
+      baseTime = 1800;
+      charTime = 220;
+    }
+    
+    let duration = baseTime + (this.currentWord.romaji.length * charTime);
+    
+    if (this.mode === 'practice') {
+      duration *= 1.4; // Practice mode is slower
+    }
+    
+    if (this.onNewWord) {
+      this.onNewWord(this.currentWord, duration);
+    }
+
+    if (this.plateTimeout) clearTimeout(this.plateTimeout);
+    this.plateTimeout = setTimeout(() => {
+      this.onPlateTimeout();
+    }, duration);
+  }
+
+  interruptWithWagyu(wagyu) {
+    if (this.currentWord && !this.currentWord.isWagyu) {
+      this.wordQueue.unshift(this.currentWord);
+    }
+    this.currentWord = wagyu;
+    this.currentCharIndex = 0;
+    this.typedString = "";
+    if (this.plateTimeout) clearTimeout(this.plateTimeout);
+    
+    if (this.onNewWord) this.onNewWord(this.currentWord, 6000);
+    this.plateTimeout = setTimeout(() => {
+      this.onPlateTimeout();
+    }, 6000);
+  }
+
+  cancelWagyu() {
+    if (this.currentWord && this.currentWord.isWagyu) {
+      if (this.plateTimeout) clearTimeout(this.plateTimeout);
+      this.nextWord();
+    }
+  }
+
+  onPlateTimeout() {
+    if (this.mode === 'speed' || this.mode === 'sudden_death') {
+      this.endGame();
+      return;
+    }
+    // Miss penalty (combo reset)
+    this.combo = 0;
+    this.rendaCount = 0;
+    if (this.onComboUpdate) this.onComboUpdate(this.combo);
+    if (this.onRendaUpdate) this.onRendaUpdate(this.rendaCount);
+    
+    if (this.onPlateFlowsAway) this.onPlateFlowsAway();
+    
+    this.nextWord();
+  }
+
+  handleKeyPress(key) {
+    if (!this.isRunning || !this.currentWord) return;
+
+    // Ignore non-character keys
+    if (key.length > 1) return;
+    
+    const targetChar = this.currentWord.romaji[this.currentCharIndex].toLowerCase();
+    const inputChar = key.toLowerCase();
+
+    this.totalKeystrokes++;
+
+    if (inputChar === targetChar) {
+      // Correct!
+      this.correctKeystrokes++;
+      this.currentCharIndex++;
+      this.typedString += inputChar;
+      this.combo++;
+      if (this.combo > this.maxCombo) this.maxCombo = this.combo;
+      
+      // Renda Meter Logic
+      this.rendaCount++;
+      let timeAdded = 0;
+      if (this.rendaCount === 15) timeAdded = 1;
+      else if (this.rendaCount === 30) timeAdded = 1;
+      else if (this.rendaCount === 45) timeAdded = 2;
+      else if (this.rendaCount >= 60) {
+        timeAdded = 3;
+        this.rendaCount = 0;
+      }
+      if (timeAdded > 0) {
+        this.timer += timeAdded;
+        if (this.onTimeAdded) this.onTimeAdded(timeAdded);
+        if (this.onTimerUpdate) this.onTimerUpdate(this.timer);
+      }
+      if (this.onRendaUpdate) this.onRendaUpdate(this.rendaCount);
+
+      if (this.onComboUpdate) this.onComboUpdate(this.combo);
+      if (this.onCorrectKey) this.onCorrectKey(this.typedString, this.currentWord.romaji.substring(this.currentCharIndex));
+
+      if (this.currentCharIndex >= this.currentWord.romaji.length) {
+        // Word complete
+        if (this.plateTimeout) clearTimeout(this.plateTimeout);
+        if (this.currentWord.isWagyu) {
+          if (this.onWagyuComplete) this.onWagyuComplete(this.currentWord.id);
+        }
+
+        const multiplier = this.getComboMultiplier();
+        const earned = Math.floor(this.currentWord.points * multiplier);
+        this.score += earned;
+        this.wordsCompleted++;
+
+        if (this.onScoreUpdate) this.onScoreUpdate(this.score, earned);
+        if (this.onWordComplete) this.onWordComplete(this.currentWord);
+
+        // Update Tally
+        if (this.platesTally[this.currentWord.points] !== undefined) {
+          this.platesTally[this.currentWord.points]++;
+        }
+        if (this.onTallyUpdate) this.onTallyUpdate(this.platesTally);
+
+        this.nextWord();
+      }
+    } else {
+      // Miss!
+      if (this.mode === 'sudden_death') {
+        this.endGame();
+        return;
+      }
+
+      if (this.mode === 'accuracy') {
+        // Plate reset!
+        this.missCount++;
+        this.combo = 0;
+        this.rendaCount = 0;
+        if (this.onRendaUpdate) this.onRendaUpdate(this.rendaCount);
+        if (this.onComboUpdate) this.onComboUpdate(this.combo);
+        if (this.onMiss) this.onMiss(inputChar, targetChar);
+        
+        if (this.plateTimeout) clearTimeout(this.plateTimeout);
+        if (this.onPlateFlowsAway) this.onPlateFlowsAway();
+        this.nextWord();
+        return;
+      }
+
+      // Normal miss
+      this.missCount++;
+      this.combo = 0;
+      this.rendaCount = 0;
+      if (this.onRendaUpdate) this.onRendaUpdate(this.rendaCount);
+      if (this.onComboUpdate) this.onComboUpdate(this.combo);
+      if (this.onMiss) this.onMiss(inputChar, targetChar);
+      
+      // Penalty: subtract 0.5s equivalent (or just let combo break be penalty)
+    }
+  }
+
+  endGame() {
+    this.isRunning = false;
+    clearInterval(this.intervalId);
+    if (this.plateTimeout) clearTimeout(this.plateTimeout);
+    if (this.onGameEnd) {
+      this.onGameEnd(this.getResults());
+    }
+  }
+
+  calculateWPM() {
+    const timeElapsed = (this.timeLimit - this.timer) || 1; // avoid /0
+    const minutes = timeElapsed / 60;
+    return Math.round((this.correctKeystrokes / 5) / minutes) || 0; // standard WPM is chars/5
+  }
+
+  getResults() {
+    return {
+      difficulty: this.difficulty,
+      score: this.score,
+      cost: this.courseCost,
+      profit: this.score - this.courseCost,
+      wordsCompleted: this.wordsCompleted,
+      accuracy: this.totalKeystrokes > 0 ? Math.round((this.correctKeystrokes / this.totalKeystrokes) * 100) : 0,
+      maxCombo: this.maxCombo,
+      wpm: this.calculateWPM(),
+      missCount: this.missCount,
+      keystrokes: this.totalKeystrokes
+    };
+  }
+}
