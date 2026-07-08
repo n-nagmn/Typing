@@ -586,8 +586,8 @@ h1, h2, h3 {
 
 /* Typing Area */
 #typing-area {
-  width: 100%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 1200px;
   text-align: center;
   background: var(--surface);
   padding: 2rem;
@@ -613,19 +613,21 @@ h1, h2, h3 {
 }
 
 #current-word-jp {
-  font-size: 3.5rem;
+  font-size: min(3.5rem, 6vw);
   font-weight: 900;
   margin-bottom: 0.5rem;
   letter-spacing: 2px;
+  white-space: nowrap;
 }
 
 #current-word-reading {
-  font-size: 1.8rem;
+  font-size: min(1.8rem, 4vw);
   color: var(--secondary);
+  white-space: nowrap;
 }
 
 #romaji-display {
-  font-size: 3rem;
+  font-size: min(3rem, 4.5vw);
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 3px;
   background: rgba(0,0,0,0.5);
@@ -633,6 +635,7 @@ h1, h2, h3 {
   border-radius: 8px;
   display: inline-block;
   min-width: 50%;
+  white-space: nowrap;
 }
 
 #typed-correct {
