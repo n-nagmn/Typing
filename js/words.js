@@ -103,7 +103,22 @@ const WORD_DATABASE = {
     { japanese: 'だんす', reading: 'だんす', romaji: 'dansu', points: 300 },
     { japanese: 'うた', reading: 'うた', romaji: 'uta', points: 300 },
     { japanese: 'かめら', reading: 'かめら', romaji: 'kamera', points: 300 },
-    { japanese: 'げえむ', reading: 'げえむ', romaji: 'geemu', points: 300 }
+    { japanese: 'げえむ', reading: 'げえむ', romaji: 'geemu', points: 300 },
+    { japanese: 'せんせい', reading: 'せんせい', romaji: 'sensei', points: 300 },
+    { japanese: 'おまわりさん', reading: 'おまわりさん', romaji: 'omawarisan', points: 300 },
+    { japanese: 'けいさつ', reading: 'けいさつ', romaji: 'keisatsu', points: 300 },
+    { japanese: 'しょうぼうし', reading: 'しょうぼうし', romaji: 'shouboushi', points: 300 },
+    { japanese: 'かんごし', reading: 'かんごし', romaji: 'kangoshi', points: 300 },
+    { japanese: 'いしゃ', reading: 'いしゃ', romaji: 'isha', points: 300 },
+    { japanese: 'だいく', reading: 'だいく', romaji: 'daiku', points: 300 },
+    { japanese: 'えきいん', reading: 'えきいん', romaji: 'ekiin', points: 300 },
+    { japanese: 'のりもの', reading: 'のりもの', romaji: 'norimono', points: 300 },
+    { japanese: 'しんかんせん', reading: 'しんかんせん', romaji: 'shinkansen', points: 300 },
+    { japanese: 'ちかてつ', reading: 'ちかてつ', romaji: 'chikatetsu', points: 300 },
+    { japanese: 'ばす', reading: 'ばす', romaji: 'basu', points: 300 },
+    { japanese: 'たくしい', reading: 'たくしい', romaji: 'takushii', points: 300 },
+    { japanese: 'ふね', reading: 'ふね', romaji: 'fune', points: 300 },
+    { japanese: 'とらっく', reading: 'とらっく', romaji: 'torakku', points: 300 }
   ],
   normal: [
     { japanese: 'おはようございます', reading: 'おはようございます', romaji: 'ohayougozaimasu', points: 800 },
@@ -198,7 +213,22 @@ const WORD_DATABASE = {
     { japanese: 'ヒーローが街を救う', reading: 'ひーろーがまちをすくう', romaji: 'hi-ro-gamachiwosukuu', points: 800 },
     { japanese: '魔法少女の変身シーン', reading: 'まほうしょうじょのへんしんしーん', romaji: 'mahoushoujonohenshinshi-n', points: 800 },
     { japanese: '巨大ロボットが出撃する', reading: 'きょだいろぼっとがしゅつげきする', romaji: 'kyodairobottogashutsugekisuru', points: 800 },
-    { japanese: '悪の組織を壊滅させる', reading: 'あくのそしきをかいめつさせる', romaji: 'akunososhikiwokaimetsusaseru', points: 800 }
+    { japanese: '悪の組織を壊滅させる', reading: 'あくのそしきをかいめつさせる', romaji: 'akunososhikiwokaimetsusaseru', points: 800 },
+    { japanese: 'フライパンで肉を焼く', reading: 'ふらいぱんでにくをやく', romaji: 'furaipandenikuwoyaku', points: 800 },
+    { japanese: '玉ねぎをみじん切りにする', reading: 'たまねぎをみじんぎりにする', romaji: 'tamanegiwomijingirinisuru', points: 800 },
+    { japanese: '鍋でお湯を沸かす', reading: 'なべでおゆをわかす', romaji: 'nabedeoyuwowakasu', points: 800 },
+    { japanese: '冷蔵庫から卵を取り出す', reading: 'れいぞうこからたまごをとりだす', romaji: 'reizoukokaratamagowotoridasu', points: 800 },
+    { japanese: '電子レンジで温める', reading: 'でんしれんじであたためる', romaji: 'denshirenjideatatameru', points: 800 },
+    { japanese: '掃除機を丁寧にかける', reading: 'そうじきをていねいにかける', romaji: 'soujikiwoteineinikakeru', points: 800 },
+    { japanese: '洗濯機を回して干す', reading: 'せんたくきをまわしてほす', romaji: 'sentakukiwomawashitehosu', points: 800 },
+    { japanese: 'お風呂の掃除をする', reading: 'おふろのそうじをする', romaji: 'ofuronosoujiwosuru', points: 800 },
+    { japanese: 'スーパーの特売日に行く', reading: 'すーぱーのとくばいびにいく', romaji: 'su-pa-notokubaibiniiku', points: 800 },
+    { japanese: 'ポイントカードを提示する', reading: 'ぽいんとかーどをていじする', romaji: 'pointoka-dowoteijisuru', points: 800 },
+    { japanese: '季節の果物を買う', reading: 'きせつのくだものをかう', romaji: 'kisetsunokudamonowokau', points: 800 },
+    { japanese: 'ネットショッピングで注文', reading: 'ねっとしょっぴんぐでちゅうもん', romaji: 'nettoshoppingudechuumon', points: 800 },
+    { japanese: '宅配便の荷物を受け取る', reading: 'たくはいびんのにもつをうけとる', romaji: 'takuhaibinnonimotsuwouketoru', points: 800 },
+    { japanese: '割引クーポンを活用する', reading: 'わりびきくーぽんをかつようする', romaji: 'waribikiku-ponwokatsuyousuru', points: 800 },
+    { japanese: '週末のセール品を狙う', reading: 'しゅうまつのせーるひんをねらう', romaji: 'shuumatsunose-ruhinwonerau', points: 800 }
   ],
   hard: [
     { japanese: '本日は晴天なり', reading: 'ほんじつはせいてんなり', romaji: 'honjitsuhaseitennari', points: 1000 },
@@ -292,7 +322,22 @@ const WORD_DATABASE = {
     { japanese: '確率論と統計学の基礎理論', reading: 'かくりつろんととうけいがくのきそりろん', romaji: 'kakuritsurontotoukeigakunokisoriron', points: 1500 },
     { japanese: '国際連合安全保障理事会の決議', reading: 'こくさいれんごうあんぜんほしょうりじかいのけつぎ', romaji: 'kokusairengouanzenhoshourijikainoketsugi', points: 1500 },
     { japanese: '大規模言語モデルの自然言語処理', reading: 'だいきぼげんごもでるのしぜんげんごしょり', romaji: 'daikibogengomoderunoshizengengoshori', points: 1500 },
-    { japanese: '超弦理論が解き明かす宇宙の謎', reading: 'ちょうげんりろんがときあかすうちゅうのなぞ', romaji: 'chougenrirongatokiakasuuchuunonazo', points: 1500 }
+    { japanese: '超弦理論が解き明かす宇宙の謎', reading: 'ちょうげんりろんがときあかすうちゅうのなぞ', romaji: 'chougenrirongatokiakasuuchuunonazo', points: 1500 },
+    { japanese: '天衣無縫の傑作を完成させる', reading: 'てんいむほうのけっさくをかんせいさせる', romaji: 'tenimuhounokessakuwokanseisaseru', points: 1500 },
+    { japanese: '憲法改正の国民投票が実施される', reading: 'けんぽうかいせいのこくみんとうひょうがじっしされる', romaji: 'kenpoukaiseinokokumintouhyougajisshisareru', points: 1500 },
+    { japanese: '著作権侵害による損害賠償請求', reading: 'ちょさくけんしんがいによるそんがいばいしょうせいきゅう', romaji: 'chosakukenshingainiyorusongaibaishouseikyuu', points: 1500 },
+    { japanese: '多国籍企業のグローバル戦略', reading: 'たこくせききぎょうのぐろーばるせんりゃく', romaji: 'takokusekikigyounoguro-barusenryaku', points: 1500 },
+    { japanese: '寡占市場における価格競争の激化', reading: 'かせんしじょうにおけるかかくきょうそうのげきか', romaji: 'kasenshijouniokerukakakukyousounogekika', points: 1500 },
+    { japanese: 'エルニーニョ現象と異常気象の関連', reading: 'えるにーにょげんしょうといじょうきしょうのかんれん', romaji: 'eruni-nyogenshoutoijoukishounokanren', points: 1500 },
+    { japanese: 'ゲリラ豪雨による都市型水害の発生', reading: 'げりらごううによるとしがたすいがいのはっせい', romaji: 'geriragouuniyorutoshigatasuigainohassei', points: 1500 },
+    { japanese: '環太平洋造山帯の地震活動', reading: 'かんたいへいようぞうざんたいのじしんかつどう', romaji: 'kantaiheiyouzouzantainojishinkatsudou', points: 1500 },
+    { japanese: '再生可能エネルギーの普及促進', reading: 'さいせいかのうえねるぎーのふきゅうそくしん', romaji: 'saiseikanouenerugi-nofukyuusokushin', points: 1500 },
+    { japanese: 'オリンポス十二神のギリシャ神話', reading: 'おりんぽすじゅうにしんのぎりしゃしんわ', romaji: 'orinposujuunishinnogirishashinwa', points: 1500 },
+    { japanese: 'ラグナロクと呼ばれる神々の黄昏', reading: 'らぐなろくとよばれるかみがみのたそがれ', romaji: 'ragunarokutoyobarerukamigaminotasogare', points: 1500 },
+    { japanese: 'ヤマタノオロチを退治した英雄', reading: 'やまたのおろちをたいじしたえいゆう', romaji: 'yamatanoorochiwotaijishitaeiyuu', points: 1500 },
+    { japanese: '天照大御神が天の岩戸に隠れる', reading: 'あまてらすおおみかみがあまのいわとにかくれる', romaji: 'amaterasuoomikamigaamanoiwatonikakureru', points: 1500 },
+    { japanese: '百鬼夜行の恐ろしいパレード', reading: 'ひゃっきやぎょうのおそろしいぱれーど', romaji: 'hyakkiyagyounoosoroshiipare-do', points: 1500 },
+    { japanese: '深海調査船が未確認生物を発見', reading: 'しんかいちょうさせんがみかくにんせいぶつをはっけん', romaji: 'shinkaichousasengamikakuninseibutsuwohakken', points: 1500 }
   ]
 };
 
