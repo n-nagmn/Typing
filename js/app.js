@@ -675,13 +675,15 @@ class App {
 
     onlineBattle.onBattleResults = (data) => {
       this.game.stop();
-      this.showScreen('battleResults');
-      soundManager.playResult();
       
-      const list = this.els.battleResultsList;
-      list.innerHTML = '';
-      
-      if (data.results.length === 0) return;
+      const showResultsUI = () => {
+        this.showScreen('battleResults');
+        soundManager.playResult();
+        
+        const list = this.els.battleResultsList;
+        list.innerHTML = '';
+        
+        if (data.results.length === 0) return;
       
       // Sort by score
       data.results.sort((a,b) => b.score - a.score);
@@ -705,8 +707,18 @@ class App {
             <div style="color:var(--text-muted);">${r.wordsCompleted}枚 / ${r.accuracy}% / ${r.combo} MaxCombo</div>
           </div>
         `;
-        list.appendChild(item);
-      });
+          list.appendChild(item);
+        });
+      };
+      
+      if (this.koDelay) {
+        setTimeout(() => {
+          showResultsUI();
+          this.koDelay = false;
+        }, 2000);
+      } else {
+        showResultsUI();
+      }
     };
 
     onlineBattle.onSpawnWagyu = (wagyu) => {
@@ -743,8 +755,20 @@ class App {
     };
 
     onlineBattle.onTugOfWarWin = (data) => {
-      // The server automatically finishes the battle, so onBattleResults will be triggered.
-      // We can just show a small toast or wait for results.
+      this.game.stop();
+      this.koDelay = true;
+      const jpDisplay = document.getElementById('battle-word-jp');
+      const readingDisplay = document.getElementById('battle-word-reading');
+      if (jpDisplay) jpDisplay.textContent = 'K.O.!!';
+      if (readingDisplay) {
+        if (data.winnerName === onlineBattle.playerName) {
+          readingDisplay.textContent = 'あなたの勝利！';
+          readingDisplay.style.color = 'var(--primary)';
+        } else {
+          readingDisplay.textContent = '相手の勝利...';
+          readingDisplay.style.color = 'var(--wrong)';
+        }
+      }
     };
   }
 
