@@ -477,12 +477,12 @@ function finishBattle(roomId) {
     const playerResult = room.results.get(player.socketId) || {};
     results.push({
       playerName: player.name,
-      score: playerResult.score || player.score || 0,
-      accuracy: playerResult.accuracy || player.accuracy || 0,
-      combo: playerResult.maxCombo || player.combo || 0,
-      wordsCompleted: playerResult.wordsCompleted || player.wordsCompleted || 0,
-      wpm: playerResult.wpm || 0,
-      missCount: playerResult.missCount || 0
+      score: playerResult.score ?? player.score ?? 0,
+      accuracy: playerResult.accuracy ?? player.accuracy ?? 0,
+      combo: playerResult.maxCombo ?? player.maxCombo ?? player.combo ?? 0,
+      wordsCompleted: playerResult.wordsCompleted ?? player.wordsCompleted ?? 0,
+      wpm: playerResult.wpm ?? 0,
+      missCount: playerResult.missCount ?? 0
     });
   });
 
@@ -828,6 +828,10 @@ io.on('connection', (socket) => {
       // Update player state
       player.score = typeof data.score === 'number' ? data.score : player.score;
       player.combo = typeof data.combo === 'number' ? data.combo : player.combo;
+      // Track maxCombo: only update if the current combo exceeds the stored max
+      if (typeof data.combo === 'number') {
+        player.maxCombo = Math.max(player.maxCombo || 0, data.combo);
+      }
       player.wordsCompleted = typeof data.wordsCompleted === 'number' ? data.wordsCompleted : player.wordsCompleted;
       player.accuracy = typeof data.accuracy === 'number' ? data.accuracy : player.accuracy;
       room.lastActivity = Date.now();
@@ -914,7 +918,7 @@ io.on('connection', (socket) => {
         room.results.set(socket.id, {
           score: typeof data.results.score === 'number' ? data.results.score : player.score,
           accuracy: typeof data.results.accuracy === 'number' ? data.results.accuracy : player.accuracy,
-          maxCombo: typeof data.results.maxCombo === 'number' ? data.results.maxCombo : player.combo,
+          maxCombo: typeof data.results.maxCombo === 'number' ? data.results.maxCombo : (player.maxCombo || 0),
           wordsCompleted: typeof data.results.wordsCompleted === 'number' ? data.results.wordsCompleted : player.wordsCompleted,
           wpm: typeof data.results.wpm === 'number' ? data.results.wpm : 0,
           missCount: typeof data.results.missCount === 'number' ? data.results.missCount : 0
