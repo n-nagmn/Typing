@@ -142,10 +142,22 @@ class RankingManager {
         })
         .join('');
 
+      // Calculate base score and combo bonus to explain the math
+      let baseScore = 0;
+      tallyConfig.forEach(c => {
+        baseScore += c.pts * (tally[c.pts] || 0);
+      });
+      const bonusScore = entry.score - baseScore;
+      
+      let scoreHtml = `<div style="font-size:1.1rem;">${entry.score.toLocaleString()}円</div>`;
+      if (baseScore > 0 && bonusScore > 0) {
+        scoreHtml += `<div style="font-size:0.75rem; color:#ff9800; margin-top:2px;">(コンボボーナス +${bonusScore.toLocaleString()}円)</div>`;
+      }
+
       tr.innerHTML = `
         <td>${rankDisplay}</td>
         <td style="font-weight:bold;">${escapeHtml(entry.name)}</td>
-        <td style="font-family:'Orbitron'; color:var(--secondary); font-size:1.1rem;">${entry.score.toLocaleString()}円</td>
+        <td style="font-family:'Orbitron'; color:var(--secondary);">${scoreHtml}</td>
         <td>${courseNames[entry.difficulty] || entry.difficulty}</td>
         <td>${entry.accuracy}%</td>
         <td>${entry.maxCombo}</td>
