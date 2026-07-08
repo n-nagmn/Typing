@@ -763,7 +763,7 @@ class App {
           <div style="font-weight: bold;">${escapeHtml(p.name)}</div>
           <div style="font-size: 0.9rem;">スコア: <span id="bp-score-${safeId}" style="color:var(--secondary);">0</span>円 | <span id="bp-combo-${safeId}">0</span>コンボ</div>
         </div>
-        <div style="width: 100%; height: 60px; background: #111; position: relative; overflow: hidden; border-radius: 4px;" id="bp-track-${safeId}"></div>
+        <div style="width: 100%; height: 80px; background: #111; position: relative; overflow: hidden; border-radius: 4px;" id="bp-track-${safeId}"></div>
       `;
       opponentsArea.appendChild(div);
       this.spawnOpponentPlate(p.name);
