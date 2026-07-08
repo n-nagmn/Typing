@@ -594,10 +594,40 @@ class App {
     document.getElementById('ranking-table').classList.add('hidden');
     document.getElementById('ranking-empty').classList.add('hidden');
 
-    const data = await rankingManager.fetchRankings(activeTab, activeDiff);
-    
-    document.getElementById('ranking-loading').classList.add('hidden');
-    rankingManager.renderRankings(data, document.getElementById('ranking-body'));
+    if (activeTab === 'mine') {
+      // Fetch all overall entries then filter by saved player name
+      const myName = (localStorage.getItem('sushiPlayerName') || '').trim();
+      
+      // Show name input if not set
+      let namePromptEl = document.getElementById('mine-name-prompt');
+      if (!namePromptEl) {
+        namePromptEl = document.createElement('div');
+        namePromptEl.id = 'mine-name-prompt';
+        namePromptEl.style.cssText = 'text-align:center; padding:1rem; color:var(--text-muted);';
+        document.getElementById('ranking-table-container').prepend(namePromptEl);
+      }
+
+      if (!myName) {
+        document.getElementById('ranking-loading').classList.add('hidden');
+        namePromptEl.textContent = '名前が設定されていません。一度プレイしてスコアを登録してください。';
+        namePromptEl.style.display = 'block';
+        return;
+      }
+      namePromptEl.style.display = 'none';
+
+      // Fetch overall (all difficulties) then filter client-side
+      const data = await rankingManager.fetchRankings('overall', activeDiff);
+      const myData = (data || []).filter(e => e.name === myName);
+      
+      document.getElementById('ranking-loading').classList.add('hidden');
+      
+      // Add rank within own scores (already sorted by score)
+      rankingManager.renderRankings(myData, document.getElementById('ranking-body'), { showPersonalRank: true, myName });
+    } else {
+      const data = await rankingManager.fetchRankings(activeTab, activeDiff);
+      document.getElementById('ranking-loading').classList.add('hidden');
+      rankingManager.renderRankings(data, document.getElementById('ranking-body'));
+    }
   }
 
   // --- Online Callbacks ---
