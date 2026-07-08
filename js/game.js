@@ -450,7 +450,8 @@ class SushiGame {
       maxCombo: this.maxCombo,
       wpm: this.calculateWPM(),
       missCount: this.missCount,
-      keystrokes: this.totalKeystrokes
+      keystrokes: this.totalKeystrokes,
+      platesTally: this.platesTally
     };
   }
 }
