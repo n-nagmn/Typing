@@ -73,7 +73,22 @@ const WORD_DATABASE = {
     { japanese: 'ほし', reading: 'ほし', romaji: 'hoshi', points: 300 },
     { japanese: 'つき', reading: 'つき', romaji: 'tsuki', points: 300 },
     { japanese: 'ゆめ', reading: 'ゆめ', romaji: 'yume', points: 300 },
-    { japanese: 'にじ', reading: 'にじ', romaji: 'niji', points: 300 }
+    { japanese: 'にじ', reading: 'にじ', romaji: 'niji', points: 300 },
+    { japanese: 'にほん', reading: 'にほん', romaji: 'nihon', points: 300 },
+    { japanese: 'あめりか', reading: 'あめりか', romaji: 'amerika', points: 300 },
+    { japanese: 'いぎりす', reading: 'いぎりす', romaji: 'igirisu', points: 300 },
+    { japanese: 'ふらんす', reading: 'ふらんす', romaji: 'furansu', points: 300 },
+    { japanese: 'どいつ', reading: 'どいつ', romaji: 'doitsu', points: 300 },
+    { japanese: 'いたりあ', reading: 'いたりあ', romaji: 'itaria', points: 300 },
+    { japanese: 'かなだ', reading: 'かなだ', romaji: 'kanada', points: 300 },
+    { japanese: 'とうきょう', reading: 'とうきょう', romaji: 'toukyou', points: 300 },
+    { japanese: 'おおさか', reading: 'おおさか', romaji: 'oosaka', points: 300 },
+    { japanese: 'ほっかいどう', reading: 'ほっかいどう', romaji: 'hokkaidou', points: 300 },
+    { japanese: 'おきなわ', reading: 'おきなわ', romaji: 'okinawa', points: 300 },
+    { japanese: 'ありがとう', reading: 'ありがとう', romaji: 'arigatou', points: 300 },
+    { japanese: 'さようなら', reading: 'さようなら', romaji: 'sayounara', points: 300 },
+    { japanese: 'すみません', reading: 'すみません', romaji: 'sumimasen', points: 300 },
+    { japanese: 'よろしく', reading: 'よろしく', romaji: 'yoroshiku', points: 300 }
   ],
   normal: [
     { japanese: 'おはようございます', reading: 'おはようございます', romaji: 'ohayougozaimasu', points: 800 },
@@ -138,7 +153,22 @@ const WORD_DATABASE = {
     { japanese: 'デザインの修正案を出す', reading: 'でざいんのしゅうせいあんをだす', romaji: 'dezainnoshuuseianwodasu', points: 800 },
     { japanese: 'アプリケーションのテスト', reading: 'あぷりけーしょんのてすと', romaji: 'apurike-shonnotesuto', points: 800 },
     { japanese: 'ソースコードをレビュー', reading: 'そーすこーどをれびゅー', romaji: 'so-suko-doworebyu-', points: 800 },
-    { japanese: 'デバッグ作業を進める', reading: 'でばっぐさぎょうをすすめる', romaji: 'debaggusagyouwosusumeru', points: 800 }
+    { japanese: 'デバッグ作業を進める', reading: 'でばっぐさぎょうをすすめる', romaji: 'debaggusagyouwosusumeru', points: 800 },
+    { japanese: '勇者は魔王を倒す', reading: 'ゆうしゃはまおうをたおす', romaji: 'yuushahamaouwotaosu', points: 800 },
+    { japanese: '異世界に転生する', reading: 'いせかいにてんせいする', romaji: 'isekainitenseisuru', points: 800 },
+    { japanese: '魔法使いの弟子になる', reading: 'まほうつかいのでしになる', romaji: 'mahoutsukainodeshininaru', points: 800 },
+    { japanese: '伝説の剣を引き抜く', reading: 'でんせつのけんをひきぬく', romaji: 'densetsunokenwohikinuku', points: 800 },
+    { japanese: 'ダンジョンを攻略する', reading: 'だんじょんをこうりゃくする', romaji: 'danjonwokouryakusuru', points: 800 },
+    { japanese: '最終ボスとの決戦', reading: 'さいしゅうぼすとのけっせん', romaji: 'saishuubosutonokessen', points: 800 },
+    { japanese: '平和な日常を取り戻す', reading: 'へいわなにちじょうをとりもどす', romaji: 'heiwananichijouwotorimodosu', points: 800 },
+    { japanese: 'クエストを受注する', reading: 'くえすとをじゅちゅうする', romaji: 'kuesutowojuchuusuru', points: 800 },
+    { japanese: '仲間を集めて旅に出る', reading: 'なかまをあつめてたびにでる', romaji: 'nakamawoatsumetetabinideru', points: 800 },
+    { japanese: 'レベルを上げて物理で殴る', reading: 'れべるをあげてぶつりでなぐる', romaji: 'reberuwoagetebutsuridenaguru', points: 800 },
+    { japanese: '宇宙船で銀河を旅する', reading: 'うちゅうせんでぎんがをたびする', romaji: 'uchuusendegingawotabisuru', points: 800 },
+    { japanese: 'タイムマシンで過去に戻る', reading: 'たいむましんでかこにもどる', romaji: 'taimumashindekakonimodoru', points: 800 },
+    { japanese: '人工知能が反乱を起こす', reading: 'じんこうちのうがはんらんをおこす', romaji: 'jinkouchinougahanranwookosu', points: 800 },
+    { japanese: '超能力に目覚める少年', reading: 'ちょうのうりょくにめざめるしょうねん', romaji: 'chounouryokunimezamerushounen', points: 800 },
+    { japanese: '秘密結社の野望を阻止する', reading: 'ひみつけっしゃのやぼうをそしする', romaji: 'himitsukesshanoyabouwososhisuru', points: 800 }
   ],
   hard: [
     { japanese: '本日は晴天なり', reading: 'ほんじつはせいてんなり', romaji: 'honjitsuhaseitennari', points: 1000 },
@@ -202,7 +232,22 @@ const WORD_DATABASE = {
     { japanese: '内憂外患の危機に直面する', reading: 'ないゆうがいかんのききにちょくめんする', romaji: 'naiyuugaikannokikinichokumensuru', points: 1500 },
     { japanese: '百花繚乱の華やかな舞台', reading: 'ひゃっかりょうらんのはなやかなぶたい', romaji: 'hyakkaryourannohanayakanabutai', points: 1500 },
     { japanese: '傍若無人な振る舞いを正す', reading: 'ぼうじゃくぶじんなふるまいをただす', romaji: 'boujakubujinnafurumaiwotadasu', points: 1500 },
-    { japanese: '破顔一笑して緊張が解ける', reading: 'はがんいっしょうしてきんちょうがとける', romaji: 'haganisshoushitekinchougatokeru', points: 1500 }
+    { japanese: '破顔一笑して緊張が解ける', reading: 'はがんいっしょうしてきんちょうがとける', romaji: 'haganisshoushitekinchougatokeru', points: 1500 },
+    { japanese: '隣の客はよく柿食う客だ', reading: 'となりのきゃくはよくかきくうきゃくだ', romaji: 'tonarinokyakuhayokukakikuukyakuda', points: 1500 },
+    { japanese: '赤巻紙青巻紙黄巻紙', reading: 'あかまきがみあおまきがみきまきがみ', romaji: 'akamakigamiaomakigamikimakigami', points: 1500 },
+    { japanese: '東京特許許可局局長', reading: 'とうきょうとっきょきょかきょくきょくちょう', romaji: 'toukyoutokkyokyokakyokukyokuchou', points: 1500 },
+    { japanese: 'すももも桃も桃のうち', reading: 'すもももももももものうち', romaji: 'sumomomomomomomomonouchi', points: 1500 },
+    { japanese: '坊主が屏風に上手に坊主の絵を描いた', reading: 'ぼうずがびょうぶにじょうずにぼうずのえをかいた', romaji: 'bouzugabyoubunijouzunibouzunoewokaita', points: 1500 },
+    { japanese: '蛙ひょこひょこ三ひょこひょこ', reading: 'かえるひょこひょこみひょこひょこ', romaji: 'kaeruhyokohyokomihyokohyoko', points: 1500 },
+    { japanese: '新春シャンソンショー', reading: 'しんしゅんしゃんそんしょー', romaji: 'shinshunshansonsho-', points: 1500 },
+    { japanese: '老若男女が楽しめるイベント', reading: 'ろうにゃくなんにょがたのしめるいべんと', romaji: 'rounyakunannyogatanoshimeruibento', points: 1500 },
+    { japanese: '魑魅魍魎が跋扈する闇夜', reading: 'ちみもうりょうがばっこするやみよ', romaji: 'chimimouryougabakkosuruyamiyo', points: 1500 },
+    { japanese: '複雑怪奇なミステリー小説', reading: 'ふくざつかいきなみすてりーしょうせつ', romaji: 'fukuzatsukaikinamisuteri-shousetsu', points: 1500 },
+    { japanese: '紆余曲折を経て完成に至る', reading: 'うよきょくせつをへてかんせいにいたる', romaji: 'uyokyokusetsuwohetekanseiniitaru', points: 1500 },
+    { japanese: '五里霧中で方向を見失う', reading: 'ごりむちゅうでほうこうをみうしなう', romaji: 'gorimuchuudehoukouwomiushinau', points: 1500 },
+    { japanese: '意味深長な笑みを浮かべる', reading: 'いみしんちょうなえみをうかべる', romaji: 'imishinchounaemiwoukaberu', points: 1500 },
+    { japanese: '四面楚歌の絶望的な状況', reading: 'しめんそかのぜつぼうてきなじょうきょう', romaji: 'shimensokanozetsuboutekinajoukyou', points: 1500 },
+    { japanese: '堅忍不抜の強い意志を示す', reading: 'けんにんふばつのつよいいしをしめす', romaji: 'kenninfubatsunotsuyoiishiwoshimesu', points: 1500 }
   ]
 };
 
