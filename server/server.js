@@ -786,27 +786,7 @@ io.on('connection', (socket) => {
         is1v1: room.players.size === 2
       });
 
-      // Wagyu Interval
-      if (room.wagyuInterval) clearInterval(room.wagyuInterval);
-      room.wagyuInterval = setInterval(() => {
-        if (room.status !== 'playing') {
-          clearInterval(room.wagyuInterval);
-          return;
-        }
-        if (Math.random() < 0.25) { // 25% chance every 8 seconds
-          room.wagyuActive = true;
-          room.wagyuId = uuidv4();
-          const wagyu = {
-            id: room.wagyuId,
-            japanese: '特選和牛',
-            reading: 'とくせんわぎゅう',
-            romaji: 'tokusenwagyuu',
-            points: 5000,
-            isWagyu: true
-          };
-          io.to(roomId).emit('spawn-wagyu', wagyu);
-        }
-      }, 8000);
+      // Wagyu feature has been removed
 
       // Set a safety timeout to auto-finish the battle
       const safetyTimeoutMs = (room.timeLimit + 30) * 1000; // timeLimit + 30s buffer
