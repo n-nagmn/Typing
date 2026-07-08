@@ -424,6 +424,18 @@ class App {
     this.game.onGameEnd = (results) => {
       if (this.isOnline) {
         onlineBattle.sendFinished(results);
+        
+        // Show waiting message
+        const jpDisplay = document.getElementById('battle-word-jp');
+        const readingDisplay = document.getElementById('battle-word-reading');
+        const romajiDisplay = document.getElementById('battle-romaji-display');
+        
+        if (jpDisplay) jpDisplay.textContent = '終了！';
+        if (readingDisplay) readingDisplay.textContent = '他のプレイヤーを待っています...';
+        if (romajiDisplay) romajiDisplay.style.display = 'none';
+        
+        const track = document.getElementById('battle-sushi-track');
+        if (track) track.innerHTML = '';
       } else {
         this.showResults(results);
       }
@@ -610,6 +622,8 @@ class App {
       
       this.startCountdown(() => {
         this.showScreen('battle');
+        const romajiDisplay = document.getElementById('battle-romaji-display');
+        if (romajiDisplay) romajiDisplay.style.display = 'inline-block';
         this.game.start();
         soundManager.playStart();
       });
