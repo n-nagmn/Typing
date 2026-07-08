@@ -743,9 +743,20 @@ io.on('connection', (socket) => {
         return;
       }
 
-      // Generate shared word list
+      // Generate shared word list without repeating in the same room session
       const wordCount = room.difficulty === 'easy' ? 30 : room.difficulty === 'hard' ? 50 : 40;
-      const words = generateBattleWords(room.difficulty, wordCount);
+      
+      if (!room.wordQueue || room.wordQueue.length < wordCount) {
+        const fullDict = wordDatabase[room.difficulty] || wordDatabase.normal;
+        const shuffled = [...fullDict];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        room.wordQueue = (room.wordQueue || []).concat(shuffled);
+      }
+      
+      const words = room.wordQueue.splice(0, wordCount);
 
       room.status = 'playing';
       room.words = words;
