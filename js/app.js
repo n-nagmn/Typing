@@ -183,7 +183,8 @@ class App {
         maxCombo: results.maxCombo,
         wpm: results.wpm,
         missCount: results.missCount,
-        wordsCompleted: results.wordsCompleted
+        wordsCompleted: results.wordsCompleted,
+        platesTally: results.platesTally || {}
       });
       
       this.els.btnSubmitScore.textContent = '登録完了！';

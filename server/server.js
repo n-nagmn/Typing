@@ -197,7 +197,7 @@ app.get('/api/rankings', (req, res) => {
 // POST /api/rankings
 app.post('/api/rankings', (req, res) => {
   try {
-    const { name, score, difficulty, accuracy, maxCombo, wpm, missCount, wordsCompleted } = req.body;
+    const { name, score, difficulty, accuracy, maxCombo, wpm, missCount, wordsCompleted, platesTally } = req.body;
 
     // Validation
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
@@ -213,6 +213,15 @@ app.post('/api/rankings', (req, res) => {
       return res.status(400).json({ error: 'Difficulty must be one of: easy, normal, hard' });
     }
 
+    // Sanitize platesTally: only accept known price keys
+    const validPrices = [300, 500, 800, 1000, 1500];
+    const sanitizedTally = {};
+    if (platesTally && typeof platesTally === 'object') {
+      validPrices.forEach(p => {
+        sanitizedTally[p] = typeof platesTally[p] === 'number' ? Math.floor(platesTally[p]) : 0;
+      });
+    }
+
     const entry = {
       id: uuidv4(),
       name: name.trim(),
@@ -223,6 +232,7 @@ app.post('/api/rankings', (req, res) => {
       wpm: typeof wpm === 'number' ? Math.round(wpm * 100) / 100 : 0,
       missCount: typeof missCount === 'number' ? Math.floor(missCount) : 0,
       wordsCompleted: typeof wordsCompleted === 'number' ? Math.floor(wordsCompleted) : 0,
+      platesTally: sanitizedTally,
       timestamp: new Date().toISOString()
     };
 

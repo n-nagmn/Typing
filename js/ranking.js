@@ -55,6 +55,30 @@ class RankingManager {
       const courseNames = { easy: 'お手軽', normal: 'おすすめ', hard: '高級' };
       const date = new Date(entry.timestamp).toLocaleDateString('ja-JP');
 
+      // Build plate tally display
+      const tally = entry.platesTally || {};
+      const tallyConfig = [
+        { pts: 300,  color: '#4caf50', label: '300円' },
+        { pts: 500,  color: '#2196f3', label: '500円' },
+        { pts: 800,  color: '#9c27b0', label: '800円' },
+        { pts: 1000, color: '#ff9800', label: '1000円' },
+        { pts: 1500, color: '#f44336', label: '1500円' },
+      ];
+      const tallyHtml = tallyConfig
+        .filter(c => tally[c.pts] > 0)
+        .map(c => `<span style="
+          display:inline-block;
+          background:${c.color}22;
+          border:1px solid ${c.color};
+          color:${c.color};
+          border-radius:4px;
+          padding:1px 5px;
+          font-size:0.72rem;
+          margin:1px;
+          white-space:nowrap;
+        ">${c.label}×${tally[c.pts]}</span>`)
+        .join('');
+
       tr.innerHTML = `
         <td>${rankDisplay}</td>
         <td style="font-weight:bold;">${escapeHtml(entry.name)}</td>
@@ -62,6 +86,7 @@ class RankingManager {
         <td>${courseNames[entry.difficulty] || entry.difficulty}</td>
         <td>${entry.accuracy}%</td>
         <td>${entry.maxCombo}</td>
+        <td style="max-width:180px;">${tallyHtml || '<span style="color:var(--text-muted);font-size:0.8rem;">-</span>'}</td>
         <td>${date}</td>
       `;
       tbody.appendChild(tr);
