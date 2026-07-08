@@ -406,7 +406,7 @@ h1, h2, h3 {
 #conveyor-area {
   position: relative;
   width: 100vw;
-  height: 250px;
+  height: 220px;
   background: linear-gradient(to bottom, #111, #000);
   border-top: 10px solid var(--wood-dark);
   border-bottom: 15px solid var(--wood-light);
@@ -449,8 +449,8 @@ h1, h2, h3 {
   top: 50%;
   left: 100%;
   transform: translate(0, -50%);
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   background: var(--surface);
   border-radius: 50%;
   display: flex;
