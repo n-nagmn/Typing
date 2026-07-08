@@ -124,18 +124,22 @@ class RankingManager {
       // Build plate tally display
       const tally = entry.platesTally || {};
       const tallyHtml = tallyConfig
-        .filter(c => tally[c.pts] > 0)
-        .map(c => `<span style="
-          display:inline-block;
-          background:${c.color}22;
-          border:1px solid ${c.color};
-          color:${c.color};
-          border-radius:4px;
-          padding:1px 5px;
-          font-size:0.72rem;
-          margin:1px;
-          white-space:nowrap;
-        ">${c.label}×${tally[c.pts]}</span>`)
+        .map(c => {
+          const count = tally[c.pts] || 0;
+          const opacity = count > 0 ? '1' : '0.3';
+          return `<span style="
+            display:inline-block;
+            background:${c.color}22;
+            border:1px solid ${c.color};
+            color:${c.color};
+            border-radius:4px;
+            padding:1px 5px;
+            font-size:0.72rem;
+            margin:1px;
+            white-space:nowrap;
+            opacity:${opacity};
+          ">${c.label}×${count}</span>`;
+        })
         .join('');
 
       tr.innerHTML = `
@@ -145,7 +149,7 @@ class RankingManager {
         <td>${courseNames[entry.difficulty] || entry.difficulty}</td>
         <td>${entry.accuracy}%</td>
         <td>${entry.maxCombo}</td>
-        <td style="max-width:180px;">${tallyHtml || '<span style="color:var(--text-muted);font-size:0.8rem;">-</span>'}</td>
+        <td style="min-width:160px;">${tallyHtml || '<span style="color:var(--text-muted);font-size:0.8rem;">-</span>'}</td>
         <td>${date}</td>
       `;
       tbody.appendChild(tr);
