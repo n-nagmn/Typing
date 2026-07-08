@@ -664,7 +664,7 @@ class App {
         if (data.wordsCompleted > this.oppWords[data.playerName]) {
           this.oppWords[data.playerName] = data.wordsCompleted;
           // Eat current plate
-          const current = track.querySelector('.sushi-plate');
+          const current = track.querySelector('.opponent-sushi-plate');
           if (current) {
             const style = window.getComputedStyle(current);
             current.style.left = style.left;
@@ -835,12 +835,9 @@ class App {
     if (!track) return;
     
     const plate = document.createElement('div');
-    plate.className = `sushi-plate`;
-    // Scale down plate for opponent view
-    plate.style.width = '60px';
-    plate.style.height = '60px';
-    plate.style.animation = `plate-move 10000ms linear forwards`; // Longer duration so it doesn't vanish early
-    plate.innerHTML = `<span style="font-size:1.5rem;">🥩</span>`;
+    plate.className = `opponent-sushi-plate`;
+    plate.style.animation = `opponent-plate-move 10000ms linear forwards`; // Longer duration so it doesn't vanish early
+    plate.innerHTML = `🥩`;
     track.appendChild(plate);
   }
 }
