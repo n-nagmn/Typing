@@ -96,9 +96,9 @@ class RankingManager {
       { pts: 1500, color: '#f44336', label: '1500円' },
     ];
 
-    // Sort by date (newest first) for personal view
+    // Sort by score for personal view
     const displayList = opts.showPersonalRank
-      ? [...rankings].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+      ? [...rankings].sort((a, b) => b.score - a.score)
       : rankings;
 
     displayList.forEach((entry, index) => {
@@ -106,11 +106,11 @@ class RankingManager {
       
       let rankDisplay;
       if (opts.showPersonalRank) {
-        // Personal mode: show play number (newest = 1st)
-        const isBest = entry.score === Math.max(...rankings.map(e => e.score));
+        // Personal mode: show personal rank
+        const isBest = index === 0;
         rankDisplay = isBest
-          ? `<span style="color:gold;">🏆 ${index + 1}回目</span>`
-          : `<span>${index + 1}回目</span>`;
+          ? `<span style="color:gold;">🏆 ${index + 1}位</span>`
+          : `<span>${index + 1}位</span>`;
       } else {
         let r = `${index + 1}位`;
         if (index === 0) rankDisplay = `<span class="rank-1">🥇 ${r}</span>`;
