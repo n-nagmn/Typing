@@ -91,6 +91,7 @@ class SushiGame {
   init(difficulty, mode = 'normal', wordList = null) {
     this.difficulty = difficulty;
     this.mode = mode;
+    this.isOnline = !!wordList;
     const config = SushiGame.DIFFICULTY_CONFIG[difficulty];
     this.timeLimit = config.time;
     this.timer = this.timeLimit;
@@ -317,7 +318,7 @@ class SushiGame {
         timeAdded = 3;
         this.rendaCount = 0;
       }
-      if (timeAdded > 0) {
+      if (timeAdded > 0 && !this.isOnline) {
         this.timer += timeAdded;
         if (this.onTimeAdded) this.onTimeAdded(timeAdded);
         if (this.onTimerUpdate) this.onTimerUpdate(this.timer);
