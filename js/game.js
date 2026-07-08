@@ -441,6 +441,7 @@ class SushiGame {
   getResults() {
     return {
       difficulty: this.difficulty,
+      mode: this.mode,
       score: this.score,
       cost: this.courseCost,
       profit: this.score - this.courseCost,

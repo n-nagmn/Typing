@@ -3,9 +3,9 @@ class RankingManager {
     this.apiBase = apiBase;
   }
 
-  async fetchRankings(type = 'overall', difficulty = 'all') {
+  async fetchRankings(type = 'overall', difficulty = 'all', mode = 'all') {
     try {
-      const res = await fetch(`${this.apiBase}/api/rankings?type=${type}&difficulty=${difficulty}`);
+      const res = await fetch(`${this.apiBase}/api/rankings?type=${type}&difficulty=${difficulty}&mode=${mode}`);
       if (!res.ok) throw new Error('Network response was not ok');
       return await res.json();
     } catch (e) {

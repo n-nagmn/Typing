@@ -163,6 +163,7 @@ app.get('/api/rankings', (req, res) => {
   try {
     const type = req.query.type || 'overall';
     const difficulty = req.query.difficulty || 'all';
+    const mode = req.query.mode || 'all';
 
     // Check weekly reset
     if (type === 'weekly') {
@@ -176,6 +177,12 @@ app.get('/api/rankings', (req, res) => {
     // Filter by difficulty
     if (difficulty && difficulty !== 'all' && VALID_DIFFICULTIES.includes(difficulty)) {
       entries = entries.filter(e => e.difficulty === difficulty);
+    }
+
+    // Filter by mode
+    if (mode && mode !== 'all') {
+      // For old records without a mode, we assume 'normal'
+      entries = entries.filter(e => (e.mode || 'normal') === mode);
     }
 
     // Sort by score descending, then by timestamp ascending (earlier is better for ties)
@@ -197,7 +204,7 @@ app.get('/api/rankings', (req, res) => {
 // POST /api/rankings
 app.post('/api/rankings', (req, res) => {
   try {
-    const { name, score, difficulty, accuracy, maxCombo, wpm, missCount, wordsCompleted, platesTally } = req.body;
+    const { name, score, difficulty, mode, accuracy, maxCombo, wpm, missCount, wordsCompleted, platesTally } = req.body;
 
     // Validation
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
@@ -212,6 +219,9 @@ app.post('/api/rankings', (req, res) => {
     if (!VALID_DIFFICULTIES.includes(difficulty)) {
       return res.status(400).json({ error: 'Difficulty must be one of: easy, normal, hard' });
     }
+    
+    const validModes = ['normal', 'practice', 'accuracy', 'speed', 'sudden_death'];
+    const safeMode = validModes.includes(mode) ? mode : 'normal';
 
     // Sanitize platesTally: only accept known price keys
     const validPrices = [300, 500, 800, 1000, 1500];
@@ -227,6 +237,7 @@ app.post('/api/rankings', (req, res) => {
       name: name.trim(),
       score: Math.floor(score),
       difficulty: difficulty,
+      mode: safeMode,
       accuracy: typeof accuracy === 'number' ? Math.round(accuracy * 100) / 100 : 0,
       maxCombo: typeof maxCombo === 'number' ? Math.floor(maxCombo) : 0,
       wpm: typeof wpm === 'number' ? Math.round(wpm * 100) / 100 : 0,

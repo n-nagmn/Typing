@@ -187,15 +187,23 @@
       <h2 class="screen-title">🏆 ランキング</h2>
       <div class="ranking-controls">
         <div class="rank-tabs">
-          <button class="rank-tab active" data-tab="overall">総合</button>
-          <button class="rank-tab" data-tab="weekly">週間</button>
+          <button class="rank-tab active" data-tab="overall">総合ランキング</button>
+          <button class="rank-tab" data-tab="weekly">週間ランキング</button>
           <button class="rank-tab" data-tab="mine">マイスコア</button>
         </div>
         <div class="difficulty-filter">
-          <button class="filter-btn active" data-difficulty="all">全て</button>
-          <button class="filter-btn" data-difficulty="easy">お手軽</button>
-          <button class="filter-btn" data-difficulty="normal">おすすめ</button>
-          <button class="filter-btn" data-difficulty="hard">高級</button>
+          <button class="filter-btn diff-btn active" data-difficulty="all">全コース</button>
+          <button class="filter-btn diff-btn" data-difficulty="easy">お手軽</button>
+          <button class="filter-btn diff-btn" data-difficulty="normal">普通</button>
+          <button class="filter-btn diff-btn" data-difficulty="hard">激ムズ</button>
+        </div>
+        <div class="mode-filter" style="margin-top: 10px; display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
+          <button class="filter-btn rank-mode-btn active" data-mode="all">全モード</button>
+          <button class="filter-btn rank-mode-btn" data-mode="normal">普通</button>
+          <button class="filter-btn rank-mode-btn" data-mode="practice">練習</button>
+          <button class="filter-btn rank-mode-btn" data-mode="accuracy">正確重視</button>
+          <button class="filter-btn rank-mode-btn" data-mode="speed">速度必須</button>
+          <button class="filter-btn rank-mode-btn" data-mode="sudden_death">一発勝負</button>
         </div>
       </div>
       <div id="ranking-table-container">

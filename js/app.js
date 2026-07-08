@@ -180,6 +180,7 @@ class App {
         name: name,
         score: results.score,
         difficulty: results.difficulty,
+        mode: results.mode,
         accuracy: results.accuracy,
         maxCombo: results.maxCombo,
         wpm: results.wpm,
@@ -203,9 +204,17 @@ class App {
         this.loadRankings();
       });
     });
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    document.querySelectorAll('.diff-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.filter-btn').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.diff-btn').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        this.loadRankings();
+      });
+    });
+
+    document.querySelectorAll('.rank-mode-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.rank-mode-btn').forEach(t => t.classList.remove('active'));
         e.target.classList.add('active');
         this.loadRankings();
       });
@@ -614,7 +623,9 @@ class App {
 
   async loadRankings() {
     const activeTab = document.querySelector('.rank-tab.active').getAttribute('data-tab');
-    const activeDiff = document.querySelector('.filter-btn.active').getAttribute('data-difficulty');
+    const activeDiff = document.querySelector('.diff-btn.active').getAttribute('data-difficulty');
+    const activeModeBtn = document.querySelector('.rank-mode-btn.active');
+    const activeMode = activeModeBtn ? activeModeBtn.getAttribute('data-mode') : 'all';
     
     document.getElementById('ranking-loading').classList.remove('hidden');
     document.getElementById('ranking-table').classList.add('hidden');
@@ -642,7 +653,7 @@ class App {
       namePromptEl.style.display = 'none';
 
       // Fetch overall (all difficulties) then filter client-side
-      const data = await rankingManager.fetchRankings('overall', activeDiff);
+      const data = await rankingManager.fetchRankings('overall', activeDiff, activeMode);
       const myData = (data || []).filter(e => e.name === myName);
       
       document.getElementById('ranking-loading').classList.add('hidden');
@@ -650,7 +661,7 @@ class App {
       // Add rank within own scores (already sorted by score)
       rankingManager.renderRankings(myData, document.getElementById('ranking-body'), { showPersonalRank: true, myName });
     } else {
-      const data = await rankingManager.fetchRankings(activeTab, activeDiff);
+      const data = await rankingManager.fetchRankings(activeTab, activeDiff, activeMode);
       document.getElementById('ranking-loading').classList.add('hidden');
       rankingManager.renderRankings(data, document.getElementById('ranking-body'));
     }
