@@ -483,6 +483,22 @@ h1, h2, h3 {
   font-size: 4rem;
 }
 
+.opponent-sushi-plate {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(0, -50%);
+  font-size: 2.5rem;
+  animation: opponent-plate-move 2s linear forwards;
+}
+
+@keyframes opponent-plate-move {
+  0% { left: 100%; transform: translate(50%, -50%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: -10%; transform: translate(-100%, -50%); opacity: 0; }
+}
+
 @keyframes plate-enter {
   0% { transform: translateY(-50%) translateX(100vw); }
   100% { transform: translateY(-50%) translateX(0); }
