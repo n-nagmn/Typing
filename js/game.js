@@ -103,6 +103,7 @@ class SushiGame {
     this.correctKeystrokes = 0;
     this.missCount = 0;
     this.wordsCompleted = 0;
+    this.wordsSpawned = 0;
     this.rendaCount = 0;
     this.platesTally = { 300: 0, 500: 0, 800: 0, 1000: 0, 1500: 0 };
 

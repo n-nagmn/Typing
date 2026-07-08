@@ -657,13 +657,13 @@ class App {
       if(scoreEl) scoreEl.textContent = data.score;
       if(comboEl) comboEl.textContent = data.combo;
       
-      // Update opponent plate visual
+      // Update opponent plate visual using wordsSpawned (passed as wordsCompleted when onNewWord fires)
       const track = document.getElementById(`bp-track-${safeId}`);
       if (track) {
-        if (!this.oppWords[data.playerName]) this.oppWords[data.playerName] = 0;
+        if (this.oppWords[data.playerName] === undefined) this.oppWords[data.playerName] = 0;
+        // Spawn a new plate when opponent gets a new word (wordsCompleted increases each new word)
         if (data.wordsCompleted > this.oppWords[data.playerName]) {
-          this.oppWords[data.playerName] = data.wordsCompleted;
-          // Eat current plate
+          // Eat previous plate if still on screen
           const current = track.querySelector('.opponent-sushi-plate');
           if (current) {
             const style = window.getComputedStyle(current);
@@ -671,7 +671,7 @@ class App {
             current.style.animation = 'plate-eat 0.5s ease forwards';
             setTimeout(() => current.remove(), 500);
           }
-          // Spawn next plate
+          this.oppWords[data.playerName] = data.wordsCompleted;
           this.spawnOpponentPlate(data.playerName);
         }
       }
