@@ -233,8 +233,13 @@ class App {
     });
     
     this.els.btnBattleBack.addEventListener('click', () => {
-      this.showScreen('online');
-      onlineBattle.requestRoomList();
+      if (this.isOnline) {
+        onlineBattle.leaveRoom();
+        this.showScreen('online');
+        onlineBattle.requestRoomList();
+      } else {
+        this.showScreen('title');
+      }
     });
   }
 
