@@ -616,6 +616,18 @@ class App {
         if (towContainer) towContainer.style.display = 'block';
         const towBar = document.getElementById('tow-bar');
         if (towBar) towBar.style.width = '50%';
+        
+        const towLeft = document.getElementById('tow-left-name');
+        const towRight = document.getElementById('tow-right-name');
+        
+        let opponentName = '';
+        onlineBattle.players.forEach(p => {
+          if (p.name !== onlineBattle.playerName) opponentName = p.name;
+        });
+        
+        if (towLeft) towLeft.textContent = `自分 (${onlineBattle.playerName})`;
+        if (towRight) towRight.textContent = `相手 (${opponentName})`;
+        
       } else {
         if (towContainer) towContainer.style.display = 'none';
       }
