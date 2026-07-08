@@ -50,7 +50,7 @@ class OnlineBattle {
     });
 
     this.socket.on('room-joined', (data) => {
-      this.roomId = data.room.id;
+      this.roomId = data.room.roomId;
       this.isHost = false;
       this.players = data.room.players;
       if (this.onRoomJoined) this.onRoomJoined(data);
