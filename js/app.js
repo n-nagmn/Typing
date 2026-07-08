@@ -12,6 +12,7 @@ class App {
     this.setupEventListeners();
     this.setupGameCallbacks();
     this.setupOnlineCallbacks();
+    this.initMeatParticles();
     
     const savedName = localStorage.getItem('sushiPlayerName');
     if (savedName) {
@@ -250,6 +251,11 @@ class App {
       this.els.screens[screenId].classList.add('active');
     }
     this.currentScreen = screenId;
+    
+    const bg = document.getElementById('particles-bg');
+    if (bg) {
+      bg.style.display = screenId === 'title' ? 'block' : 'none';
+    }
   }
 
   startSinglePlayer(difficulty) {
@@ -454,9 +460,29 @@ class App {
 
   // --- Visual Effects ---
 
+  initMeatParticles() {
+    const bg = document.getElementById('particles-bg');
+    if (!bg) return;
+    
+    // Create floating meat emojis
+    const meats = ['🥩', '🥓', '🍖', '🔥'];
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = meats[Math.floor(Math.random() * meats.length)];
+      
+      // Random positioning and timing
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (15 + Math.random() * 20) + 's';
+      p.style.animationDelay = '-' + (Math.random() * 30) + 's';
+      p.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
+      
+      bg.appendChild(p);
+    }
+  }
+
   createParticles() {
-    // Particles (falling emojis/words) removed based on user feedback,
-    // but the background gradient div (#particles-bg) is kept in HTML.
+    // Other particles logic (currently unused)
   }
 
   createSushiPlate(word, duration = 5000) {
