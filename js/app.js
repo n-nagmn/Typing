@@ -483,11 +483,35 @@ class App {
   eatSushiPlate() {
     const plate = document.getElementById('current-plate');
     if (plate) {
-      // Get current computed X position so it eats in place instead of jumping
+      // Get current computed position so animation plays in-place
       const style = window.getComputedStyle(plate);
-      const matrix = new WebKitCSSMatrix(style.transform);
+      const rect = plate.getBoundingClientRect();
       plate.style.left = style.left;
-      plate.style.animation = 'plate-eat 0.5s ease forwards';
+      plate.style.animation = 'plate-eat 0.7s ease forwards';
+
+      // Spawn grilling sparks & smoke at the plate's position
+      const track = plate.parentElement;
+      if (track) {
+        const fx = document.createElement('div');
+        fx.className = 'plate-grilling';
+        fx.style.left = style.left;
+        fx.style.top = '50%';
+        fx.style.width = '130px';
+        fx.style.height = '130px';
+        fx.style.transform = 'translate(-50%, -50%)'; // account for left being plate's left edge approx
+        fx.style.left = `calc(${style.left} + 65px)`; // center of plate
+        fx.innerHTML = `
+          <span class="spark">🔥</span>
+          <span class="spark">✨</span>
+          <span class="spark">🔥</span>
+          <span class="spark">✨</span>
+          <span class="spark">🌟</span>
+          <span class="smoke">💨</span>
+          <span class="smoke">💨</span>
+        `;
+        track.appendChild(fx);
+        setTimeout(() => fx.remove(), 1000);
+      }
     }
   }
 

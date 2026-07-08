@@ -523,10 +523,54 @@ h1, h2, h3 {
 }
 
 @keyframes plate-eat {
-  0% { transform: translateY(-50%) scale(1); opacity: 1; filter: brightness(1) sepia(0); }
-  50% { transform: translateY(-50%) scale(1.2); opacity: 0.8; filter: brightness(1.5) sepia(1) hue-rotate(-50deg); }
-  100% { transform: translateY(-50%) scale(0); opacity: 0; filter: brightness(2); }
+  0%   { transform: translateY(-50%) scale(1);    opacity: 1;   filter: brightness(1)   sepia(0)   hue-rotate(0deg); }
+  20%  { transform: translateY(-50%) scale(1.08) rotate(-3deg); opacity: 1;   filter: brightness(2)   sepia(1)   hue-rotate(-30deg); }
+  35%  { transform: translateY(-50%) scale(1.12) rotate( 3deg); opacity: 1;   filter: brightness(3)   sepia(1)   hue-rotate(-60deg); box-shadow: 0 0 40px rgba(255,80,0,0.9), 0 0 80px rgba(255,120,0,0.6); }
+  55%  { transform: translateY(-50%) scale(1.15) rotate(-2deg); opacity: 0.9; filter: brightness(3.5) sepia(1)   hue-rotate(-80deg); box-shadow: 0 0 60px rgba(255,50,0,1),   0 0 120px rgba(255,80,0,0.7); }
+  75%  { transform: translateY(-50%) scale(1.1)  rotate( 1deg); opacity: 0.6; filter: brightness(4)   sepia(1)   hue-rotate(-90deg); }
+  100% { transform: translateY(-50%) scale(0);   opacity: 0;   filter: brightness(5)   sepia(0); }
 }
+
+@keyframes grill-spark {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  60%  { transform: translate(-50%, -200%) scale(0.6); opacity: 0.8; }
+  100% { transform: translate(-50%, -350%) scale(0);  opacity: 0; }
+}
+
+@keyframes grill-smoke {
+  0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0.7; }
+  100% { transform: translate(-50%, -250%) scale(2);  opacity: 0; }
+}
+
+.plate-grilling {
+  position: absolute;
+  pointer-events: none;
+  z-index: 99;
+}
+
+.plate-grilling .spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.4rem;
+  animation: grill-spark 0.7s ease-out forwards;
+}
+
+.plate-grilling .spark:nth-child(2) { animation-delay: 0.05s; left: 30%; }
+.plate-grilling .spark:nth-child(3) { animation-delay: 0.10s; left: 70%; }
+.plate-grilling .spark:nth-child(4) { animation-delay: 0.03s; left: 20%; }
+.plate-grilling .spark:nth-child(5) { animation-delay: 0.08s; left: 80%; }
+
+.plate-grilling .smoke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.8rem;
+  animation: grill-smoke 0.9s ease-out forwards;
+}
+
+.plate-grilling .smoke:nth-child(6) { animation-delay: 0.15s; left: 40%; }
+.plate-grilling .smoke:nth-child(7) { animation-delay: 0.25s; left: 60%; }
 
 /* Renda Meter */
 .renda-meter-container {
