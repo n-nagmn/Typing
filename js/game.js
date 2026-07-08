@@ -385,10 +385,15 @@ class SushiGame {
     }
   }
 
-  endGame() {
+  stop() {
     this.isRunning = false;
     clearInterval(this.intervalId);
     if (this.plateTimeout) clearTimeout(this.plateTimeout);
+  }
+
+  endGame() {
+    if (!this.isRunning) return;
+    this.stop();
     if (this.onGameEnd) {
       this.onGameEnd(this.getResults());
     }
