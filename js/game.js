@@ -105,6 +105,7 @@ class SushiGame {
     this.wordsCompleted = 0;
     this.wordsSpawned = 0;
     this.rendaCount = 0;
+    this._pendingComplete = false;
     this.platesTally = { 300: 0, 500: 0, 800: 0, 1000: 0, 1500: 0 };
 
     // Use provided wordList (for online) or default database
@@ -287,9 +288,29 @@ class SushiGame {
 
     // Ignore non-character keys
     if (key.length > 1) return;
-    
-    let targetChar = this.currentWord.romaji[this.currentCharIndex].toLowerCase();
+
     const inputChar = key.toLowerCase();
+
+    // ── ん末尾バッファ処理 ──
+    // 前の単語が n で終わり、単語完了を保留している状態
+    if (this._pendingComplete) {
+      this._pendingComplete = false;
+      if (inputChar === 'n') {
+        // nn 入力: 2個目の n を吸収してそのまま単語完了（コンボ継続）
+        this.totalKeystrokes++;
+        this.correctKeystrokes++;
+        this._finishWord();
+        return;
+      } else {
+        // n 以外: 今の単語を完了させてから、その文字を次の単語に回す
+        this._finishWord();
+        // 次の単語に対してこの文字を再処理（再帰）
+        this.handleKeyPress(key);
+        return;
+      }
+    }
+
+    let targetChar = this.currentWord.romaji[this.currentCharIndex].toLowerCase();
 
     this.totalKeystrokes++;
 
@@ -330,27 +351,14 @@ class SushiGame {
       if (this.onCorrectKey) this.onCorrectKey(this.typedString, this.currentWord.romaji.substring(this.currentCharIndex));
 
       if (this.currentCharIndex >= this.currentWord.romaji.length) {
-        // Word complete
-        if (this.plateTimeout) clearTimeout(this.plateTimeout);
-        if (this.currentWord.isWagyu) {
-          if (this.onWagyuComplete) this.onWagyuComplete(this.currentWord.id);
+        // Word complete — but if the word ends with 'n', buffer completion
+        // to absorb an optional 2nd 'n' (nn input) without breaking combo.
+        if (this.currentWord.romaji.endsWith('n')) {
+          this._pendingComplete = true;
+          // Don't call nextWord yet — wait for next keypress
+        } else {
+          this._finishWord();
         }
-
-        const multiplier = this.getComboMultiplier();
-        const earned = Math.floor(this.currentWord.points * multiplier);
-        this.score += earned;
-        this.wordsCompleted++;
-
-        if (this.onScoreUpdate) this.onScoreUpdate(this.score, earned);
-        if (this.onWordComplete) this.onWordComplete(this.currentWord);
-
-        // Update Tally
-        if (this.platesTally[this.currentWord.points] !== undefined) {
-          this.platesTally[this.currentWord.points]++;
-        }
-        if (this.onTallyUpdate) this.onTallyUpdate(this.platesTally);
-
-        this.nextWord();
       }
     } else {
       // Miss!
@@ -398,6 +406,30 @@ class SushiGame {
     if (this.onGameEnd) {
       this.onGameEnd(this.getResults());
     }
+  }
+
+  _finishWord() {
+    if (!this.currentWord) return;
+    if (this.plateTimeout) clearTimeout(this.plateTimeout);
+    if (this.currentWord.isWagyu) {
+      if (this.onWagyuComplete) this.onWagyuComplete(this.currentWord.id);
+    }
+
+    const multiplier = this.getComboMultiplier();
+    const earned = Math.floor(this.currentWord.points * multiplier);
+    this.score += earned;
+    this.wordsCompleted++;
+
+    if (this.onScoreUpdate) this.onScoreUpdate(this.score, earned);
+    if (this.onWordComplete) this.onWordComplete(this.currentWord);
+
+    // Update Tally
+    if (this.platesTally[this.currentWord.points] !== undefined) {
+      this.platesTally[this.currentWord.points]++;
+    }
+    if (this.onTallyUpdate) this.onTallyUpdate(this.platesTally);
+
+    this.nextWord();
   }
 
   calculateWPM() {
