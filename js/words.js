@@ -88,7 +88,22 @@ const WORD_DATABASE = {
     { japanese: 'ありがとう', reading: 'ありがとう', romaji: 'arigatou', points: 300 },
     { japanese: 'さようなら', reading: 'さようなら', romaji: 'sayounara', points: 300 },
     { japanese: 'すみません', reading: 'すみません', romaji: 'sumimasen', points: 300 },
-    { japanese: 'よろしく', reading: 'よろしく', romaji: 'yoroshiku', points: 300 }
+    { japanese: 'よろしく', reading: 'よろしく', romaji: 'yoroshiku', points: 300 },
+    { japanese: 'ぴあの', reading: 'ぴあの', romaji: 'piano', points: 300 },
+    { japanese: 'ぎたあ', reading: 'ぎたあ', romaji: 'gitaa', points: 300 },
+    { japanese: 'どらむ', reading: 'どらむ', romaji: 'doramu', points: 300 },
+    { japanese: 'さっかあ', reading: 'さっかあ', romaji: 'sakkaa', points: 300 },
+    { japanese: 'やきゅう', reading: 'やきゅう', romaji: 'yakyuu', points: 300 },
+    { japanese: 'すいえい', reading: 'すいえい', romaji: 'suiei', points: 300 },
+    { japanese: 'ばすけっと', reading: 'ばすけっと', romaji: 'basuketto', points: 300 },
+    { japanese: 'おりがみ', reading: 'おりがみ', romaji: 'origami', points: 300 },
+    { japanese: 'どくしょ', reading: 'どくしょ', romaji: 'dokusho', points: 300 },
+    { japanese: 'えいが', reading: 'えいが', romaji: 'eiga', points: 300 },
+    { japanese: 'さんぽ', reading: 'さんぽ', romaji: 'sanpo', points: 300 },
+    { japanese: 'だんす', reading: 'だんす', romaji: 'dansu', points: 300 },
+    { japanese: 'うた', reading: 'うた', romaji: 'uta', points: 300 },
+    { japanese: 'かめら', reading: 'かめら', romaji: 'kamera', points: 300 },
+    { japanese: 'げえむ', reading: 'げえむ', romaji: 'geemu', points: 300 }
   ],
   normal: [
     { japanese: 'おはようございます', reading: 'おはようございます', romaji: 'ohayougozaimasu', points: 800 },
@@ -168,7 +183,22 @@ const WORD_DATABASE = {
     { japanese: 'タイムマシンで過去に戻る', reading: 'たいむましんでかこにもどる', romaji: 'taimumashindekakonimodoru', points: 800 },
     { japanese: '人工知能が反乱を起こす', reading: 'じんこうちのうがはんらんをおこす', romaji: 'jinkouchinougahanranwookosu', points: 800 },
     { japanese: '超能力に目覚める少年', reading: 'ちょうのうりょくにめざめるしょうねん', romaji: 'chounouryokunimezamerushounen', points: 800 },
-    { japanese: '秘密結社の野望を阻止する', reading: 'ひみつけっしゃのやぼうをそしする', romaji: 'himitsukesshanoyabouwososhisuru', points: 800 }
+    { japanese: '秘密結社の野望を阻止する', reading: 'ひみつけっしゃのやぼうをそしする', romaji: 'himitsukesshanoyabouwososhisuru', points: 800 },
+    { japanese: '吾輩は猫である', reading: 'わがはいはねこである', romaji: 'wagahaihanekodearu', points: 800 },
+    { japanese: '走れメロスの冒頭', reading: 'はしれめろすのぼうとう', romaji: 'hashiremerosunoboutou', points: 800 },
+    { japanese: '銀河鉄道の夜を空想する', reading: 'ぎんがてつどうのよるをくうそうする', romaji: 'gingatetsudounoyoruwokuusousuru', points: 800 },
+    { japanese: '光の速さで移動する', reading: 'ひかりのはやさでいどうする', romaji: 'hikarinohayasadeidousuru', points: 800 },
+    { japanese: '絶対に諦めない心', reading: 'ぜったいにあきらめないこころ', romaji: 'zettainiakiramenaikokoro', points: 800 },
+    { japanese: '永遠の愛を誓う二人', reading: 'えいえんのあいをちかうふたり', romaji: 'eiennoaiwochikaufutari', points: 800 },
+    { japanese: '時間旅行のパラドックス', reading: 'じかんりょこうのぱらどっくす', romaji: 'jikanryokounoparadokkusu', points: 800 },
+    { japanese: '幽霊屋敷の謎を解く', reading: 'ゆうれいやしきのなぞをとく', romaji: 'yuureiyashikinonazowotoku', points: 800 },
+    { japanese: '探偵の華麗なる推理', reading: 'たんていのかれいなるすいり', romaji: 'tanteinokareinarusuiri', points: 800 },
+    { japanese: '吸血鬼の恐ろしい伝説', reading: 'きゅうけつきのおそろしいでんせつ', romaji: 'kyuuketsukinoosoroshiidensetsu', points: 800 },
+    { japanese: 'ゾンビからの逃走劇', reading: 'ぞんびからのとうそうげき', romaji: 'zonbikaranotousougeki', points: 800 },
+    { japanese: 'ヒーローが街を救う', reading: 'ひーろーがまちをすくう', romaji: 'hi-ro-gamachiwosukuu', points: 800 },
+    { japanese: '魔法少女の変身シーン', reading: 'まほうしょうじょのへんしんしーん', romaji: 'mahoushoujonohenshinshi-n', points: 800 },
+    { japanese: '巨大ロボットが出撃する', reading: 'きょだいろぼっとがしゅつげきする', romaji: 'kyodairobottogashutsugekisuru', points: 800 },
+    { japanese: '悪の組織を壊滅させる', reading: 'あくのそしきをかいめつさせる', romaji: 'akunososhikiwokaimetsusaseru', points: 800 }
   ],
   hard: [
     { japanese: '本日は晴天なり', reading: 'ほんじつはせいてんなり', romaji: 'honjitsuhaseitennari', points: 1000 },
@@ -247,7 +277,22 @@ const WORD_DATABASE = {
     { japanese: '五里霧中で方向を見失う', reading: 'ごりむちゅうでほうこうをみうしなう', romaji: 'gorimuchuudehoukouwomiushinau', points: 1500 },
     { japanese: '意味深長な笑みを浮かべる', reading: 'いみしんちょうなえみをうかべる', romaji: 'imishinchounaemiwoukaberu', points: 1500 },
     { japanese: '四面楚歌の絶望的な状況', reading: 'しめんそかのぜつぼうてきなじょうきょう', romaji: 'shimensokanozetsuboutekinajoukyou', points: 1500 },
-    { japanese: '堅忍不抜の強い意志を示す', reading: 'けんにんふばつのつよいいしをしめす', romaji: 'kenninfubatsunotsuyoiishiwoshimesu', points: 1500 }
+    { japanese: '堅忍不抜の強い意志を示す', reading: 'けんにんふばつのつよいいしをしめす', romaji: 'kenninfubatsunotsuyoiishiwoshimesu', points: 1500 },
+    { japanese: '量子力学の不確定性原理', reading: 'りょうしりきがくのふかくていせいげんり', romaji: 'ryoushirikigakunofukakuteiseigenri', points: 1500 },
+    { japanese: '相対性理論における時間の遅れ', reading: 'そうたいせいりろんにおけるじかんのおくれ', romaji: 'soutaiseirironniokerujikannookure', points: 1500 },
+    { japanese: '遺伝子組み換え技術の進歩', reading: 'いでんしくみかえぎじゅつのしんぽ', romaji: 'idenshikumikaegijutsunoshinpo', points: 1500 },
+    { japanese: '熱力学の第二法則の不可逆性', reading: 'ねつりきがくのだいにほうそくのふかぎゃくせい', romaji: 'netsurikigakunodainihousokunofukagyakusei', points: 1500 },
+    { japanese: 'ブラックホールの事象の地平面', reading: 'ぶらっくほーるのじしょうのちへいめん', romaji: 'burakkuho-runojishounochiheimen', points: 1500 },
+    { japanese: '仮想現実空間での高度な相互作用', reading: 'かそうげんじつくうかんでのこうどなそうごさよう', romaji: 'kasougenjitsukuukandenokoudonasougosayou', points: 1500 },
+    { japanese: '持続可能な開発目標の達成', reading: 'じぞくかのうなかいはつもくひょうのたっせい', romaji: 'jizokukanounakaihatsumokuhyounotassei', points: 1500 },
+    { japanese: '地球温暖化による異常気象の多発', reading: 'ちきゅうおんだんかによるいじょうきしょうのたはつ', romaji: 'chikyuuondankaniyoruijoukishounotahatsu', points: 1500 },
+    { japanese: 'データベース管理システムの最適化', reading: 'でーたべーすかんりしすてむのさいてきか', romaji: 'de-tabe-sukanrishisutemunosaitekika', points: 1500 },
+    { japanese: '人工多能性幹細胞の臨床応用', reading: 'じんこうたのうせいかんさいぼうのりんしょうおうよう', romaji: 'jinkoutanouseikansaibounorinshououyou', points: 1500 },
+    { japanese: 'マクロ経済学における金融政策の効果', reading: 'まくろけいざいがくにおけるきんゆうせいさくのこうか', romaji: 'makurokeizaigakuniokerukinyuuseisakunokouka', points: 1500 },
+    { japanese: '確率論と統計学の基礎理論', reading: 'かくりつろんととうけいがくのきそりろん', romaji: 'kakuritsurontotoukeigakunokisoriron', points: 1500 },
+    { japanese: '国際連合安全保障理事会の決議', reading: 'こくさいれんごうあんぜんほしょうりじかいのけつぎ', romaji: 'kokusairengouanzenhoshourijikainoketsugi', points: 1500 },
+    { japanese: '大規模言語モデルの自然言語処理', reading: 'だいきぼげんごもでるのしぜんげんごしょり', romaji: 'daikibogengomoderunoshizengengoshori', points: 1500 },
+    { japanese: '超弦理論が解き明かす宇宙の謎', reading: 'ちょうげんりろんがときあかすうちゅうのなぞ', romaji: 'chougenrirongatokiakasuuchuunonazo', points: 1500 }
   ]
 };
 
