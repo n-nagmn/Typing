@@ -1781,7 +1781,7 @@ const WORD_DATABASE = {
     {
       "japanese": "セキュリティを強化する",
       "reading": "せきゅりてぃをきょうかする",
-      "romaji": "sekyuritiwokyoukasuru",
+      "romaji": "sekyurithiwokyoukasuru",
       "points": 800
     },
     {
