@@ -695,9 +695,20 @@ class App {
       const p1 = document.getElementById('tow-left-name');
       const p2 = document.getElementById('tow-right-name');
       const bar = document.getElementById('tow-bar');
-      if (p1) p1.textContent = data.p1Name;
-      if (p2) p2.textContent = data.p2Name;
-      if (bar) bar.style.width = data.p1Percent + '%';
+      
+      let percent = data.p1Percent;
+      
+      // If the current player is P2, flip the perspective so "I" am always on the left
+      if (data.p2Name === onlineBattle.playerName) {
+        if (p1) p1.textContent = "自分 (" + data.p2Name + ")";
+        if (p2) p2.textContent = "相手 (" + data.p1Name + ")";
+        percent = 100 - data.p1Percent;
+      } else {
+        if (p1) p1.textContent = "自分 (" + data.p1Name + ")";
+        if (p2) p2.textContent = "相手 (" + data.p2Name + ")";
+      }
+      
+      if (bar) bar.style.width = percent + '%';
     };
 
     onlineBattle.onTugOfWarWin = (data) => {
@@ -760,7 +771,8 @@ class App {
   }
 
   spawnOpponentPlate(playerName) {
-    const track = document.getElementById(`bp-track-${playerName}`);
+    const safeId = escapeHtml(playerName).replace(/\s+/g, '_');
+    const track = document.getElementById(`bp-track-${safeId}`);
     if (!track) return;
     
     const plate = document.createElement('div');
