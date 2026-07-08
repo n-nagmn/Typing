@@ -990,7 +990,7 @@ h1, h2, h3 {
 
 #ranking-table-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 1350px;
   height: 60vh;
   overflow-y: auto;
   background: var(--surface);
