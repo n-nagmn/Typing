@@ -331,6 +331,10 @@ class App {
       tCor.textContent = '';
       tCur.textContent = word.romaji[0] || '';
       tRem.textContent = word.romaji.substring(1);
+      
+      if (this.isOnline) {
+        onlineBattle.sendProgress(this.game.score, this.game.combo, this.game.wordsSpawned);
+      }
     };
 
     this.game.onCorrectKey = (typed, remaining) => {
@@ -808,7 +812,7 @@ class App {
       // Sanitize p.name for ID to prevent issues with spaces
       const safeId = escapeHtml(p.name).replace(/\s+/g, '_');
       
-      this.oppWords[p.name] = 1;
+      this.oppWords[p.name] = 0;
       const div = document.createElement('div');
       div.className = 'glass-panel';
       div.style.padding = '0.5rem';
@@ -821,7 +825,7 @@ class App {
         <div style="width: 100%; height: 80px; background: #111; position: relative; overflow: hidden; border-radius: 4px;" id="bp-track-${safeId}"></div>
       `;
       opponentsArea.appendChild(div);
-      this.spawnOpponentPlate(p.name);
+      // Removed early spawnOpponentPlate
     });
   }
 
@@ -835,7 +839,7 @@ class App {
     // Scale down plate for opponent view
     plate.style.width = '60px';
     plate.style.height = '60px';
-    plate.style.animation = `plate-move 6000ms linear forwards`; // Match normal mode roughly
+    plate.style.animation = `plate-move 10000ms linear forwards`; // Longer duration so it doesn't vanish early
     plate.innerHTML = `<span style="font-size:1.5rem;">🥩</span>`;
     track.appendChild(plate);
   }
