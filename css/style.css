@@ -617,13 +617,13 @@ h1, h2, h3 {
   font-weight: 900;
   margin-bottom: 0.5rem;
   letter-spacing: 2px;
-  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 #current-word-reading {
   font-size: min(1.8rem, 4vw);
   color: var(--secondary);
-  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 #romaji-display {
@@ -635,7 +635,8 @@ h1, h2, h3 {
   border-radius: 8px;
   display: inline-block;
   min-width: 50%;
-  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 #typed-correct {
