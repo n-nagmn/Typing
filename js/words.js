@@ -58,7 +58,22 @@ const WORD_DATABASE = {
     { japanese: 'きいろ', reading: 'きいろ', romaji: 'kiiro', points: 300 },
     { japanese: 'みどり', reading: 'みどり', romaji: 'midori', points: 300 },
     { japanese: 'くろ', reading: 'くろ', romaji: 'kuro', points: 300 },
-    { japanese: 'しろ', reading: 'しろ', romaji: 'shiro', points: 300 }
+    { japanese: 'しろ', reading: 'しろ', romaji: 'shiro', points: 300 },
+    { japanese: 'ぞう', reading: 'ぞう', romaji: 'zou', points: 300 },
+    { japanese: 'らいおん', reading: 'らいおん', romaji: 'raion', points: 300 },
+    { japanese: 'きりん', reading: 'きりん', romaji: 'kirin', points: 300 },
+    { japanese: 'うさぎ', reading: 'うさぎ', romaji: 'usagi', points: 300 },
+    { japanese: 'かめ', reading: 'かめ', romaji: 'kame', points: 300 },
+    { japanese: 'ぺんぎん', reading: 'ぺんぎん', romaji: 'pengin', points: 300 },
+    { japanese: 'ぱんだ', reading: 'ぱんだ', romaji: 'panda', points: 300 },
+    { japanese: 'からす', reading: 'からす', romaji: 'karasu', points: 300 },
+    { japanese: 'すずめ', reading: 'すずめ', romaji: 'suzume', points: 300 },
+    { japanese: 'くも', reading: 'くも', romaji: 'kumo', points: 300 },
+    { japanese: 'そら', reading: 'そら', romaji: 'sora', points: 300 },
+    { japanese: 'ほし', reading: 'ほし', romaji: 'hoshi', points: 300 },
+    { japanese: 'つき', reading: 'つき', romaji: 'tsuki', points: 300 },
+    { japanese: 'ゆめ', reading: 'ゆめ', romaji: 'yume', points: 300 },
+    { japanese: 'にじ', reading: 'にじ', romaji: 'niji', points: 300 }
   ],
   normal: [
     { japanese: 'おはようございます', reading: 'おはようございます', romaji: 'ohayougozaimasu', points: 800 },
@@ -108,7 +123,22 @@ const WORD_DATABASE = {
     { japanese: 'ゴミを出しに行く', reading: 'ごみをだしにいく', romaji: 'gomiwodashiniiku', points: 800 },
     { japanese: 'ペットの散歩に行く', reading: 'ぺっとのさんぽにいく', romaji: 'pettonosanponiiku', points: 800 },
     { japanese: '新聞を読む', reading: 'しんぶんをよむ', romaji: 'shinbunwoyomu', points: 800 },
-    { japanese: '旅行の計画を立てる', reading: 'りょこうのけいかくをたてる', romaji: 'ryokounokeikakuwotateru', points: 800 }
+    { japanese: '旅行の計画を立てる', reading: 'りょこうのけいかくをたてる', romaji: 'ryokounokeikakuwotateru', points: 800 },
+    { japanese: 'データベースを構築する', reading: 'でーたべーすをこうちくする', romaji: 'de-tabe-suwokouchikusuru', points: 800 },
+    { japanese: 'エラーを修正する', reading: 'えらーをしゅうせいする', romaji: 'era-woshuuseisuru', points: 800 },
+    { japanese: 'ソフトウェアを更新する', reading: 'そふとうぇあをこうしんする', romaji: 'sofutoweawokoushinsuru', points: 800 },
+    { japanese: 'フロントエンドの開発', reading: 'ふろんとえんどのかいはつ', romaji: 'furontoendonokaihatsu', points: 800 },
+    { japanese: 'バックエンドの処理', reading: 'ばっくえんどのしょり', romaji: 'bakkuendonoshori', points: 800 },
+    { japanese: 'サーバーを再起動する', reading: 'さーばーをさいきどうする', romaji: 'sa-ba-wosaikidousuru', points: 800 },
+    { japanese: 'セキュリティを強化する', reading: 'せきゅりてぃをきょうかする', romaji: 'sekyuritiwokyoukasuru', points: 800 },
+    { japanese: 'クラウドサービスを利用', reading: 'くらうどさーびすをりよう', romaji: 'kuraudosa-bisuworiyou', points: 800 },
+    { japanese: 'ファイルをアップロード', reading: 'ふぁいるをあっぷろーど', romaji: 'fairuwoappuro-do', points: 800 },
+    { japanese: 'パスワードを変更する', reading: 'ぱすわーどをへんこうする', romaji: 'pasuwa-dowohenkousuru', points: 800 },
+    { japanese: 'プロジェクトの進捗管理', reading: 'ぷろじぇくとのしんちょくかんり', romaji: 'purojekutonoshinchokukanri', points: 800 },
+    { japanese: 'デザインの修正案を出す', reading: 'でざいんのしゅうせいあんをだす', romaji: 'dezainnoshuuseianwodasu', points: 800 },
+    { japanese: 'アプリケーションのテスト', reading: 'あぷりけーしょんのてすと', romaji: 'apurike-shonnotesuto', points: 800 },
+    { japanese: 'ソースコードをレビュー', reading: 'そーすこーどをれびゅー', romaji: 'so-suko-doworebyu-', points: 800 },
+    { japanese: 'デバッグ作業を進める', reading: 'でばっぐさぎょうをすすめる', romaji: 'debaggusagyouwosusumeru', points: 800 }
   ],
   hard: [
     { japanese: '本日は晴天なり', reading: 'ほんじつはせいてんなり', romaji: 'honjitsuhaseitennari', points: 1000 },
@@ -157,7 +187,22 @@ const WORD_DATABASE = {
     { japanese: '徹頭徹尾自分の意見を貫く', reading: 'てっとうてつびじぶんのいけんをつらぬく', romaji: 'tettoutetsubijibunnoikenwotsuranuku', points: 1500 },
     { japanese: '馬耳東風と聞き流す', reading: 'ばじとうふうとききながす', romaji: 'bajitoufuutokikinagasu', points: 1500 },
     { japanese: '半信半疑で話を聞く', reading: 'はんしんはんぎではなしをきく', romaji: 'hanshinhangidehanashiwokiku', points: 1500 },
-    { japanese: '粉骨砕身の覚悟で挑む', reading: 'ふんこつさいしんのかくごでいどむ', romaji: 'funkotsusaishinnokakugodeidomu', points: 1500 }
+    { japanese: '粉骨砕身の覚悟で挑む', reading: 'ふんこつさいしんのかくごでいどむ', romaji: 'funkotsusaishinnokakugodeidomu', points: 1500 },
+    { japanese: '栄枯盛衰は世の習い', reading: 'えいこせいすいはよのならい', romaji: 'eikoseisuihayononarai', points: 1500 },
+    { japanese: '温厚篤実な人柄が慕われる', reading: 'おんこうとくじつなひとがらがしたわれる', romaji: 'onkoutokujitsunahitogaragasitawareru', points: 1500 },
+    { japanese: '換骨奪胎の優れた作品', reading: 'かんこつだったいのすぐれたさくひん', romaji: 'kankotsudattainosuguretasakuhin', points: 1500 },
+    { japanese: '虚心坦懐に意見を交わす', reading: 'きょしんたんかいにいけんをかわす', romaji: 'kyoshintankainiikenwokawasu', points: 1500 },
+    { japanese: '孤軍奮闘で難局を乗り切る', reading: 'こぐんふんとうでなんきょくをのりきる', romaji: 'kogunfuntoudenankyokuwonorikiru', points: 1500 },
+    { japanese: '山紫水明の美しい景色', reading: 'さんしすいめいのうつくしいけしき', romaji: 'sanshisuimeinoutsukushiikeshiki', points: 1500 },
+    { japanese: '神出鬼没の怪盗が現れる', reading: 'しんしゅつきぼつのかいとうがあらわれる', romaji: 'shinshutsukibotsunokaitougaarawareru', points: 1500 },
+    { japanese: '晴耕雨読の穏やかな日々', reading: 'せいこううどくのおだやかなひび', romaji: 'seikouudokunoodayakanahibi', points: 1500 },
+    { japanese: '切磋琢磨して技を磨く', reading: 'せっさたくましてわざをみがく', romaji: 'sessatakumashitewazawomigaku', points: 1500 },
+    { japanese: '大胆不敵な挑戦を始める', reading: 'だいたんふてきなちょうせんをはじめる', romaji: 'daitanfutekinachousenwohajimeru', points: 1500 },
+    { japanese: '東奔西走して資金を集める', reading: 'とうほんせいそうしてしきんをあつめる', romaji: 'touhonseisoushiteshikinwoatsumeru', points: 1500 },
+    { japanese: '内憂外患の危機に直面する', reading: 'ないゆうがいかんのききにちょくめんする', romaji: 'naiyuugaikannokikinichokumensuru', points: 1500 },
+    { japanese: '百花繚乱の華やかな舞台', reading: 'ひゃっかりょうらんのはなやかなぶたい', romaji: 'hyakkaryourannohanayakanabutai', points: 1500 },
+    { japanese: '傍若無人な振る舞いを正す', reading: 'ぼうじゃくぶじんなふるまいをただす', romaji: 'boujakubujinnafurumaiwotadasu', points: 1500 },
+    { japanese: '破顔一笑して緊張が解ける', reading: 'はがんいっしょうしてきんちょうがとける', romaji: 'haganisshoushitekinchougatokeru', points: 1500 }
   ]
 };
 
