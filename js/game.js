@@ -113,8 +113,17 @@ class SushiGame {
         console.error("WORD_DATABASE not loaded");
         this.wordQueue = [{japanese:"エラー", reading:"えらー", romaji:"era-", points:100}];
       } else {
-        this.wordQueue = [...window.WORD_DATABASE[difficulty]];
-        this.shuffleWords();
+        if (!SushiGame.sessionQueues) {
+          SushiGame.sessionQueues = { easy: null, normal: null, hard: null };
+        }
+        if (!SushiGame.sessionQueues[difficulty] || SushiGame.sessionQueues[difficulty].length === 0) {
+          SushiGame.sessionQueues[difficulty] = [...window.WORD_DATABASE[difficulty]];
+          for (let i = SushiGame.sessionQueues[difficulty].length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [SushiGame.sessionQueues[difficulty][i], SushiGame.sessionQueues[difficulty][j]] = [SushiGame.sessionQueues[difficulty][j], SushiGame.sessionQueues[difficulty][i]];
+          }
+        }
+        this.wordQueue = SushiGame.sessionQueues[difficulty];
       }
     }
   }
@@ -157,6 +166,9 @@ class SushiGame {
       if (this.difficulty) {
         this.wordQueue = [...window.WORD_DATABASE[this.difficulty]];
         this.shuffleWords();
+        if (SushiGame.sessionQueues) {
+          SushiGame.sessionQueues[this.difficulty] = this.wordQueue;
+        }
       }
     }
     
