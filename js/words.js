@@ -42,7 +42,23 @@ const WORD_DATABASE = {
     { japanese: 'でんわ', reading: 'でんわ', romaji: 'denwa', points: 300 },
     { japanese: 'なまえ', reading: 'なまえ', romaji: 'namae', points: 300 },
     { japanese: 'こえ', reading: 'こえ', romaji: 'koe', points: 300 },
-    { japanese: 'かお', reading: 'かお', romaji: 'kao', points: 300 }
+    { japanese: 'かお', reading: 'かお', romaji: 'kao', points: 300 },
+    { japanese: 'ばなな', reading: 'ばなな', romaji: 'banana', points: 300 },
+    { japanese: 'みかん', reading: 'みかん', romaji: 'mikan', points: 300 },
+    { japanese: 'いちご', reading: 'いちご', romaji: 'ichigo', points: 300 },
+    { japanese: 'ぶどう', reading: 'ぶどう', romaji: 'budou', points: 300 },
+    { japanese: 'すいか', reading: 'すいか', romaji: 'suika', points: 300 },
+    { japanese: 'とまと', reading: 'とまと', romaji: 'tomato', points: 300 },
+    { japanese: 'きゅうり', reading: 'きゅうり', romaji: 'kyuuri', points: 300 },
+    { japanese: 'たまねぎ', reading: 'たまねぎ', romaji: 'tamanegi', points: 300 },
+    { japanese: 'にんじん', reading: 'にんじん', romaji: 'ninjin', points: 300 },
+    { japanese: 'じゃがいも', reading: 'じゃがいも', romaji: 'jagaimo', points: 300 },
+    { japanese: 'あか', reading: 'あか', romaji: 'aka', points: 300 },
+    { japanese: 'あお', reading: 'あお', romaji: 'ao', points: 300 },
+    { japanese: 'きいろ', reading: 'きいろ', romaji: 'kiiro', points: 300 },
+    { japanese: 'みどり', reading: 'みどり', romaji: 'midori', points: 300 },
+    { japanese: 'くろ', reading: 'くろ', romaji: 'kuro', points: 300 },
+    { japanese: 'しろ', reading: 'しろ', romaji: 'shiro', points: 300 }
   ],
   normal: [
     { japanese: 'おはようございます', reading: 'おはようございます', romaji: 'ohayougozaimasu', points: 800 },
@@ -77,7 +93,22 @@ const WORD_DATABASE = {
     { japanese: '映画館に行く', reading: 'えいがかんにいく', romaji: 'eigakanniiku', points: 800 },
     { japanese: '友達と買い物に行く', reading: 'ともだちとかいものにいく', romaji: 'tomodachitokaimononiiku', points: 800 },
     { japanese: '朝ごはんをしっかり食べる', reading: 'あさごはんをしっかりたべる', romaji: 'asagohanwoshikkaritaberu', points: 800 },
-    { japanese: 'スーパーで野菜を買う', reading: 'すーぱーでやさいをかう', romaji: 'su-pa-deyasaiwokau', points: 800 }
+    { japanese: 'スーパーで野菜を買う', reading: 'すーぱーでやさいをかう', romaji: 'su-pa-deyasaiwokau', points: 800 },
+    { japanese: '英語の勉強をする', reading: 'えいごのべんきょうをする', romaji: 'eigonobenkyouwosuru', points: 800 },
+    { japanese: '数学のテストを受ける', reading: 'すうがくのてすとをうける', romaji: 'suugakunotesutowoukeru', points: 800 },
+    { japanese: 'プログラミングを学ぶ', reading: 'ぷろぐらみんぐをまなぶ', romaji: 'puroguraminguwomanabu', points: 800 },
+    { japanese: 'パソコンで作業する', reading: 'ぱそこんでさぎょうする', romaji: 'pasokondesagyousuru', points: 800 },
+    { japanese: 'メールを送信する', reading: 'めーるをそうしんする', romaji: 'me-ruwosoushinsuru', points: 800 },
+    { japanese: '会議の資料を作る', reading: 'かいぎのしりょうをつくる', romaji: 'kaiginoshiryouwotsukuru', points: 800 },
+    { japanese: '料理のレシピを見る', reading: 'りょうりのれしぴをみる', romaji: 'ryourinoreshipiwomiru', points: 800 },
+    { japanese: '写真を撮影する', reading: 'しゃしんをさつえいする', romaji: 'shashinwosatsueisuru', points: 800 },
+    { japanese: '自転車で出かける', reading: 'じてんしゃででかける', romaji: 'jitenshadedekakeru', points: 800 },
+    { japanese: '洗濯物を干す', reading: 'せんたくものをほす', romaji: 'sentakumonowohosu', points: 800 },
+    { japanese: '部屋の換気をする', reading: 'へやのかんきをする', romaji: 'heyanokankiwosuru', points: 800 },
+    { japanese: 'ゴミを出しに行く', reading: 'ごみをだしにいく', romaji: 'gomiwodashiniiku', points: 800 },
+    { japanese: 'ペットの散歩に行く', reading: 'ぺっとのさんぽにいく', romaji: 'pettonosanponiiku', points: 800 },
+    { japanese: '新聞を読む', reading: 'しんぶんをよむ', romaji: 'shinbunwoyomu', points: 800 },
+    { japanese: '旅行の計画を立てる', reading: 'りょこうのけいかくをたてる', romaji: 'ryokounokeikakuwotateru', points: 800 }
   ],
   hard: [
     { japanese: '本日は晴天なり', reading: 'ほんじつはせいてんなり', romaji: 'honjitsuhaseitennari', points: 1000 },
@@ -111,7 +142,22 @@ const WORD_DATABASE = {
     { japanese: '前代未聞の大事件', reading: 'ぜんだいみもんのだいじけん', romaji: 'zendaimimonnodaijiken', points: 1500 },
     { japanese: '異体同心の強い絆', reading: 'いたいどうしんのつよいきずな', romaji: 'itaidoushinnotsuyoikizuna', points: 1500 },
     { japanese: '一触即発の危機的状況', reading: 'いっしょくそくはつのききてきじょうきょう', romaji: 'isshokusokuhatsunokikitekijoukyou', points: 1500 },
-    { japanese: '言語道断の振る舞い', reading: 'ごんごどうだんのふるまい', romaji: 'gongodoudannofurumai', points: 1500 }
+    { japanese: '言語道断の振る舞い', reading: 'ごんごどうだんのふるまい', romaji: 'gongodoudannofurumai', points: 1500 },
+    { japanese: '臥薪嘗胆の思いで努力を重ねる', reading: 'がしんしょうたんのおもいでどりょくをかさねる', romaji: 'gashinshoutannoomoidedoryokuwokasaneru', points: 1500 },
+    { japanese: '画竜点睛を欠く結果となる', reading: 'がりょうてんせいをかくけっかとなる', romaji: 'garyoutenseiwokakukekkatonaru', points: 1500 },
+    { japanese: '疑心暗鬼に陥って迷う', reading: 'ぎしんあんきにおちいってまよう', romaji: 'gishinankiniochiittemayou', points: 1500 },
+    { japanese: '空前絶後の大ヒットを記録する', reading: 'くうぜんぜつごのだいひっとをきろくする', romaji: 'kuuzenzetsugonodaihittowokirokusuru', points: 1500 },
+    { japanese: '荒唐無稽な話を信じ込む', reading: 'こうとうむけいなはなしをしんじこむ', romaji: 'koutoumukeinahanashiwoshinjikomu', points: 1500 },
+    { japanese: '質実剛健な校風を誇る', reading: 'しつじつごうけんなこうふうをほこる', romaji: 'shitsujitsugoukennakoufuuwohokoru', points: 1500 },
+    { japanese: '自給自足の生活を夢見る', reading: 'じきゅうじそくのせいかつをゆめみる', romaji: 'jikyuujisokunoseikatsuwoyumemiru', points: 1500 },
+    { japanese: '針小棒大に言いふらす', reading: 'しんしょうぼうだいにいいふらす', romaji: 'shinshouboudainiiifurasu', points: 1500 },
+    { japanese: '絶体絶命のピンチを脱する', reading: 'ぜったいぜつめいのぴんちをだっする', romaji: 'zettaizetsumeinopinchiwodassuru', points: 1500 },
+    { japanese: '千載一遇のチャンスを掴む', reading: 'せんざいいちぐうのちゃんすをつかむ', romaji: 'senzaiichiguunochansuwotsukamu', points: 1500 },
+    { japanese: '猪突猛進で目標に向かう', reading: 'ちょとつもうしんでもくひょうにむかう', romaji: 'chototsumoushindemokuhyounimukau', points: 1500 },
+    { japanese: '徹頭徹尾自分の意見を貫く', reading: 'てっとうてつびじぶんのいけんをつらぬく', romaji: 'tettoutetsubijibunnoikenwotsuranuku', points: 1500 },
+    { japanese: '馬耳東風と聞き流す', reading: 'ばじとうふうとききながす', romaji: 'bajitoufuutokikinagasu', points: 1500 },
+    { japanese: '半信半疑で話を聞く', reading: 'はんしんはんぎではなしをきく', romaji: 'hanshinhangidehanashiwokiku', points: 1500 },
+    { japanese: '粉骨砕身の覚悟で挑む', reading: 'ふんこつさいしんのかくごでいどむ', romaji: 'funkotsusaishinnokakugodeidomu', points: 1500 }
   ]
 };
 
